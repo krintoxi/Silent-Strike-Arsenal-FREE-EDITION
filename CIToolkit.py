@@ -58,7 +58,8 @@ print("""$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                                 (C.I.T)                                        $ 
                         -Krintoxi  (Leo Edge)                                  $ 
                             -Intercuba.net                                     $ 
-                      -cibermambi@intercuba.net                                $ 
+                      -cibermambi@intercuba.net                                $
+                            -leo.edge@icloud.com                               $ 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 """)              
 #End Of Title Area
