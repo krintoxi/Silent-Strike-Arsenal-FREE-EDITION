@@ -51,17 +51,24 @@ print("""
 ⠀⠀⠀⠀⠀⢱⡀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣦⡀⠀⠀⠀⠀⢠⠀⠀1997⠀⠀⠀⠀⠘⢇⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀  ⢳⠀⠀⠈⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠙⠧⣉⠲⠤⣀⡴⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     """)
-print("""$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+lines = ["""
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 ╔═╗┌─┐┬ ┬┌┐┌┌┬┐┌─┐┬─┐  ╦┌┐┌┌┬┐┌─┐┬  ┬  ┬┌─┐┌─┐┌┐┌┌─┐┌─┐  ╔╦╗┌─┐┌─┐┬  ┬┌─┬┌┬┐   $ 
 ║  │ ││ ││││ │ ├┤ ├┬┘  ║│││ │ ├┤ │  │  ││ ┬├┤ ││││  ├┤    ║ │ ││ ││  ├┴┐│ │    $ 
 ╚═╝└─┘└─┘┘└┘ ┴ └─┘┴└─  ╩┘└┘ ┴ └─┘┴─┘┴─┘┴└─┘└─┘┘└┘└─┘└─┘   ╩ └─┘└─┘┴─┘┴ ┴┴ ┴    $ 
-                                (C.I.T)                                        $ 
-                        -Krintoxi  (Leo Edge)                                  $ 
-                            -Intercuba.net                                     $ 
-                      -cibermambi@intercuba.net                                $
-                            -leo.edge@icloud.com                               $ 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-""")              
+"""]              
+
+from time import sleep
+import sys
+
+for line in lines:          # for each line of text (or each message)
+    for c in line:          # for each character in each line
+        print(c, end='')    # print a single character, and keep the cursor there.
+        sys.stdout.flush()  # flush the buffer
+        sleep(0.01)          # wait a little to make the effect look good.
+    print('')               # line break (optional, could also be part of the message)
+print('-------------------------------------------------------------')
 #End Of Title Area
 #Start Of Options 
   
@@ -263,7 +270,7 @@ def loopfunc():
             cmd1 = os.system("ls scripts/shells/Obfuscated")
          
     if choice == "phptools":
-        cmd1 = os.system("python scripts/phptools.py")
+        cmd1 = os.system("python2 scripts/phptools.py")
 
     if choice == "backdoorssh":
         print("-------------------------------------")
@@ -371,7 +378,7 @@ def loopfunc():
         print("----------------------------------")
         print("       **Launching Steghide GUI**")
         print("----------------------------------")
-        cmd1 = os.system ("python2 scripts/pySteg/pysteg.py")
+        cmd1 = os.system ("python2 tools/pySteg/pysteg.py")
 
     if choice == "dping":
         print("----------------------------------")
@@ -440,8 +447,6 @@ def loopfunc():
         cmd1 = os.system ('python2 scripts/exifpwn.pyc')
         print("Launched!")
 
-    if choice == "ciphertext":
-        cmd1 = os.system ("python3 scripts/Ciphers/ciphertext.py")
     if choice =="localports":
         cmd1 = os.system ("python3 scripts/portscanLOCAL.py")
     if choice == "portscan":
@@ -461,7 +466,7 @@ def loopfunc():
         asearch = input('Anonymous Web Search: ')
         cmd1 = os.system("proxychains firefox https://duckduckgo.com/?q="+asearch)
     if choice == "noobpasswd":
-        cmd1 = os.system("python scripts/noobcrack.py")
+        cmd1 = os.system("python2 scripts/noobcrack.py")
 
      #EASTEREGGS   
     if choice == "wle":
