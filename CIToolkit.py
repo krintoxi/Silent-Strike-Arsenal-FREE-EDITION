@@ -24,7 +24,7 @@ print("""
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠟⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣶⣶⣶⣶⣶⡄⠀⠀⢹⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇ 75 ⣿⡇⠀⠀⠈⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⡿⠁⠀⠀⠀⠀⠀⣠⡄⠀⠀⠀⠀⠀⠀⠀⠀⢻⣇⠀⠀⢀⣿⠇⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⡿⠁⠀⠀⠀⠀⠀⣠⡄⠀⠀⠀⠀⠀⠀⠀⠀⢻⣇⠀x⢀⣿⠇⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠀⠀⠀⠀⠀⠀⣰⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⢷⣶⠿⠋⠀⠀⠀⢸⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⠃⠀⠀⠀⠀⢀⣴⣿⣥⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀⠀⢀⣴⣿⣋⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣽⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -44,8 +44,8 @@ print("""
 ⠀⢀⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⣧⡀⢀⣾⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠈⣿⣿⠀⠀
 ⠀⢸⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⡿⠋⠀⠀⢀⡀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡆⠀
 ⠀⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⢸⡟⠛k⢻r⠛i⠛n⠛t⣿ox⢻i⣯⠀⠀⠀⠀⠀⠀⢹⣿⡇⠀
-⢀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠸⠿⠾⠷⠾⠿⠾⠿⠷⠿⠿⠿⠿⠾⠟⠿⠿⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀
-⢸⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⠀
+⢀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀xxxxx⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠸⠿⠾⠷⠾⠿⠾⠿⠷⠿⠿⠿⠿⠾⠟⠿⠿⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀
+⢸⣿⡟⠀⠀⠀⠀⠀⠀⠀xxxxxxxxxxx⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⠀
 ⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣽⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡀
 ⢾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇
 """)
@@ -89,6 +89,9 @@ def loopfunc():
 #START of options    
     choice = input("C.I Tool-Kit Command :")
     print ("*****************************")
+
+
+
 #START of ADMIN PANEL FINDER    
     if choice == "apf":
             print("""
@@ -102,21 +105,33 @@ def loopfunc():
        ____\////\\\\\\\\\__/\\\__/\\\\\\\\\\\__/\\\_______\/\\\_______ 
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
-        ----------------------------
-        Launching Admin PanelFinder.PL
-        ----------------------------
+        ****************************
+            Admin Panel Module
+        ****************************
         """)
             cmd1 = os.system ("perl scripts/finder.pl")
 #END OF ADMIN PANEL FINDER
 
+
+#START OF CALL FOR TERMINAL
     if choice == "terminal":
         cmd1 = os.system("sudo apt-get install xterm")
         cmd1 = os.system("xterm")
+#END OF CALL FOR TERMINAL
 
-    
+
+
+    #Commands and help call
     if choice == "commands":
+        print("Scanning modules...")
         cmd1 = os.system("python3 scripts/commands.py")
-    
+    if choice == "help":
+        print("Scanning modules...")
+        cmd1 = os.system("python3 scripts/commands.py")
+    #END of commands and help call
+
+
+    #START OF SYSTEM INFORMATION   
     if choice == "sys":
         print ("************************************************************************")
         print ("                        System Information:")
@@ -125,6 +140,9 @@ def loopfunc():
         print ("************************************************************************")
         #End System Information    
 
+
+
+#---------------------Start of SQL Injection module call--------------------------------
     if choice == "sqli":
         print("""
                 ________/\\\\\\\\\________/\\\\\\\\\\\________/\\\\\\\\\\\\\\\_        
@@ -139,11 +157,18 @@ def loopfunc():
                         Counter Intelligence Toolkit
         """)
         print("-------------------------")
-        print("Launching SQLI Injector....")
+        print(" SQL Injector Module....")
         print("-------------------------")
+        print("The Toolkit Script requires Tor and Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("sudo apt-get install tor")
         cmd1 = os.system ("sudo service tor start")
         cmd1 = os.system ("sudo python2 scripts/sqli.pyc")
+#----------------------End of SQL injection module call----------------------------------
+
+
+
         
     if choice == "vulscan":
         print("""
@@ -158,9 +183,10 @@ def loopfunc():
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
         """)
-        print("-------------------------")
-        print("Launching Web Vul Scanner...")
-        print("-------------------------")
+      
+        print("The Toolkit Script requires Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("sudo python2 scripts/vulscan.py")
 
     #Start of Misc Options
@@ -177,9 +203,9 @@ def loopfunc():
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
         """)
-        print("------------------")
+        print("******************")
         print("Installing Tor....")
-        print("------------------")
+        print("******************")
         cmd1 = os.system ("sudo apt-get install tor")
         cmd1 = os.system ("sudo apt-get install proxychains")
         cmd1 = os.system ("sudo service tor start")
@@ -197,9 +223,9 @@ def loopfunc():
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
         """)
-        print("-----------------")
+        print("****************")
         print("Starting Tor....")
-        print("-----------------")
+        print("****************")
         cmd1 = os.system ("sudo service tor start")
         
     if choice == "tors":
@@ -215,9 +241,9 @@ def loopfunc():
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
         """)
-        print("----------------")
+        print("****************")
         print("Tor Status Check")
-        print("----------------")
+        print("****************")
         cmd1 = os.system ("sudo service tor status")
                 
     if choice == "dvpn":
@@ -233,9 +259,9 @@ def loopfunc():
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
         """)
-        print ("-------------------------------------------------------")
+        print ("*****************************************************")
         print ("Downloading ans installing BitMask (RiseUp.Net) V.P.N")
-        print ("-----------------------------------------------------") 
+        print ("*****************************************************") 
         cmd1 = os.system ("echo 'deb http://deb.bitmask.net/debian wheezy main' | sudo tee -a /etc/apt/sources.list.d/bitmask.list")    
         cmd1 = os.system ("curl https://dl.bitmask.net/apt.key | sudo apt-key add -")
         cmd1 = os.system ("sudo apt-get update")
@@ -255,9 +281,9 @@ def loopfunc():
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
         """)
-        print("-------------------------------------------------------")
+        print("*******************************************************")
         ooro = input("Obfuscated or Deobfuscated Shells?: ")
-        print("-------------------------------------------------------")
+        print("*******************************************************")
         if ooro == "deobfuscated":
             print (ooro+" shell directory is: scripts/shells/Deobfuscated")
             print("***************************************************************")
@@ -268,6 +294,9 @@ def loopfunc():
             cmd1 = os.system("ls scripts/shells/Obfuscated")
          
     if choice == "phptools":
+        print("The Toolkit Script requires Tor and Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system("python2 scripts/phptools.py")
 
     if choice == "backdoorssh":
@@ -292,6 +321,9 @@ def loopfunc():
         print("-------------------------------------")
         print(" ##Launching NSlookup Script## ")
         print("-------------------------------------")
+        print("The Toolkit Script requires Tor and Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("python2 scripts/dns.py")
 
     if choice == "hash type" or choice == "hashtype" or choice == "tipo de hash":
@@ -310,6 +342,9 @@ def loopfunc():
         print("----------------------------------")
         print(" **Launching Hash Identify Script**")
         print("----------------------------------")
+        print("The Toolkit Script requires Tor and Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("python2 scripts/Hash_ID.pyc")
 
     if choice == "numconverter":
@@ -334,6 +369,9 @@ def loopfunc():
         print("----------------------------------------")
         print(" * * *Launching Converter Script * * * ")
         print("----------------------------------------")
+        print("The Toolkit Script requires Tor and Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("python2 scripts/hex_converter.pyc")
     
     if choice == "update":
@@ -378,6 +416,9 @@ def loopfunc():
         print("----------------------------------")
         print("       **Launching Steghide GUI**")
         print("----------------------------------")
+        print("The Toolkit Script requires Tor and Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("python2 tools/pySteg/pysteg.py")
 
     if choice == "dping":
@@ -430,6 +471,9 @@ def loopfunc():
         ####################
         """)
         print("This Toolbox has some requirements , if you think you have them, continue.")
+        print("The Toolkit Script requires Tor and Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("python2 scripts/toolbox.py")
     
     if choice == "spoof my mac":
@@ -443,6 +487,9 @@ def loopfunc():
         print("----------------------------------------------")
         print("Launching IMAGE METADATA EXTRACTOR AND REMOVER")
         print("----------------------------------------------")
+        print("The Toolkit Script requires Tor and Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ('sudo apt-get install libimage-exiftool-perl')
         cmd1 = os.system ('python2 scripts/exifpwn.pyc')
         print("Launched!")
@@ -466,6 +513,9 @@ def loopfunc():
         asearch = input('Anonymous Web Search: ')
         cmd1 = os.system("proxychains firefox https://duckduckgo.com/?q="+asearch)
     if choice == "noobpasswd":
+        print("The Toolkit Script requires Tor and Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system("python2 scripts/noobcrack.py")
 
      #EASTEREGGS   
@@ -481,6 +531,9 @@ def loopfunc():
 
     #Testing Toxic Crawler
     if choice == "toxicdork":
+        print("The Toolkit Script requires Tor and Python2.")
+        print("Please follow the on screen install.")
+        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("python2 scripts/Tox1cDorkeR.py")
 
 
