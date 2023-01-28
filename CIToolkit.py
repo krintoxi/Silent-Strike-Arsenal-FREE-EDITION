@@ -128,6 +128,18 @@ def loopfunc():
     if choice == "help":
         print("Scanning modules...")
         cmd1 = os.system("python3 scripts/commands.py")
+    if choice == "Commands":
+        print("Scanning modules...")
+        cmd1 = os.system("python3 scripts/commands.py")
+    if choice == "COMMANDS":
+        print("Scanning modules...")
+        cmd1 = os.system("python3 scripts/commands.py")
+    if choice == "What can i do?":
+        print("Scanning modules...")
+        cmd1 = os.system("python3 scripts/commands.py")
+    if choice == "what can i do?":
+        print("Scanning modules...")
+        cmd1 = os.system("python3 scripts/commands.py")
     #END of commands and help call
 
 
@@ -156,9 +168,9 @@ def loopfunc():
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
         """)
-        print("-------------------------")
+        print("*************************")
         print(" SQL Injector Module....")
-        print("-------------------------")
+        print("*************************")
         print("The Toolkit Script requires Tor and Python2.")
         print("Please follow the on screen install.")
         cmd1 = os.system ("sudo apt-get install python2")
@@ -182,6 +194,7 @@ def loopfunc():
        ____\////\\\\\\\\\__/\\\__/\\\\\\\\\\\__/\\\_______\/\\\_______ 
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
+                        ****************************
         """)
       
         print("The Toolkit Script requires Python2.")
@@ -202,6 +215,7 @@ def loopfunc():
        ____\////\\\\\\\\\__/\\\__/\\\\\\\\\\\__/\\\_______\/\\\_______ 
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
+                        ****************************
         """)
         print("******************")
         print("Installing Tor....")
@@ -300,9 +314,9 @@ def loopfunc():
         cmd1 = os.system("python2 scripts/phptools.py")
 
     if choice == "backdoorssh":
-        print("-------------------------------------")
+        print("************************************")
         print("Launching Deploy Script.. ")
-        print("-------------------------------------")
+        print("************************************")
         print("deploy a specific backdoor, such as a netcat backdoor or msfvenom backdoor")
         cmd1 = os.system ("sudo python scripts/sshbackdoors/dependencies.py")
         cmd1 = os.system ("sudo python scripts/sshbackdoors/master.py")
