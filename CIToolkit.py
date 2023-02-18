@@ -236,6 +236,8 @@ def loopfunc():
        ____\////\\\\\\\\\__/\\\__/\\\\\\\\\\\__/\\\_______\/\\\_______ 
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
+                        ****************************
+
         """)
         print("****************")
         print("Starting Tor....")
@@ -254,6 +256,7 @@ def loopfunc():
        ____\////\\\\\\\\\__/\\\__/\\\\\\\\\\\__/\\\_______\/\\\_______ 
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
+                        ****************************
         """)
         print("****************")
         print("Tor Status Check")
@@ -322,9 +325,9 @@ def loopfunc():
         cmd1 = os.system ("sudo python scripts/sshbackdoors/master.py")
 
     if choice == "discover":
-        print("-------------------------------------")
+        print("*************************************")
         print("Launching Discover.... ")
-        print("-------------------------------------")
+        print("")
         cmd1 = os.system ("sudo apt-get install git")
         cmd1 = os.system ("sudo git clone git://github.com/leebaird/discover.git /opt/discover/")
         cmd1 = os.system ("cd /opt/discover/")
