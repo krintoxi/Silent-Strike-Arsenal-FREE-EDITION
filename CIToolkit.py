@@ -66,32 +66,35 @@ for line in lines:          # for each line of text (or each message)
     print('')               # line break (optional, could also be part of the message)
 #End Of Title Area  
 #Start Of Authentication
-#key = "25" #User Authentication Key
-#print ("*********************************")
-#kitkey = getpass.getpass("C.I Tool-Kit access key : ")# Verify Key
-#print ("*********************************")
-
-#if kitkey == key:
-#    print("")
-#    print ("*****************************")
-#    print ("Authentication Successful!") #SuccessFul Authentication
-#    #print ("*****************************")
-#    print ("please run: (update) before first command.")
-
-#else:
-#    print ("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-#    print("Wrong Key! YOU HAVE BEEN BOOTED OFF ") #Wrong Key Warrning
-#    print ("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-#    print ("-Krintoxi")
-#    sys.exit(0) #Exists Tool-Kit if Authentication Key is Wrong
+import warnings
+import getpass
+import sys
+from getpass import GetPassWarning
+warnings.filterwarnings("ignore", category=GetPassWarning)
+VALID_KEY = "freecuba"
+def authenticate():
+    print("C.I Tool-Kit Authentication")
+    print("***************************")
+    entered_key = getpass.getpass("Access Key: ")
+    if entered_key == VALID_KEY:
+        print("***************************")
+        print("\nAuthentication Successful!")
+        print("********************************************************")
+        print("Please run: (update) before the first command.(commands)")
+        print("********************************************************")
+    else:
+        print("xxxxxxxxxxxxxxxxxxxxx")
+        print("\nAccess Denied!")
+        print("xxxxxxxxxxxxxxxxxxxxx")
+        print("Invalid key. You have been denied access to the C.I Tool-Kit.")
+        sys.exit(0)
+if __name__ == "__main__":
+    authenticate()
 #End Of Authentication      
 def loopfunc():    
 #START of options    
     choice = input("C.I Tool-Kit Command :")
     print ("*****************************")
-
-
-
 #START of ADMIN PANEL FINDER    
     if choice == "apf":
             print("""
@@ -179,9 +182,6 @@ def loopfunc():
         cmd1 = os.system ("sudo python2 scripts/sqli.pyc")
 #----------------------End of SQL injection module call----------------------------------
 
-
-
-        
     if choice == "vulscan":
         print("""
                 ________/\\\\\\\\\________/\\\\\\\\\\\________/\\\\\\\\\\\\\\\_        
