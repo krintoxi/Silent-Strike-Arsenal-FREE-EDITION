@@ -338,7 +338,7 @@ def loopfunc():
         print("***********************************************")
         print(" ##Launching Domain Whois Information Script## ")
         print("***********************************************")
-        cmd1 = os.system ("python2 scripts/dns.py")
+        cmd1 = os.system ("python3 scripts/dns.py")
 
     if choice == "hash type" or choice == "hashtype" or choice == "tipo de hash":
         print("""
