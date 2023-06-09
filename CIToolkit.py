@@ -335,12 +335,9 @@ def loopfunc():
             
 
     if choice == "dinfo":
-        print("-------------------------------------")
-        print(" ##Launching NSlookup Script## ")
-        print("-------------------------------------")
-        print("The Toolkit Script requires Tor and Python2.")
-        print("Please follow the on screen install.")
-        cmd1 = os.system ("sudo apt-get install python2")
+        print("***********************************************")
+        print(" ##Launching Domain Whois Information Script## ")
+        print("***********************************************")
         cmd1 = os.system ("python2 scripts/dns.py")
 
     if choice == "hash type" or choice == "hashtype" or choice == "tipo de hash":
