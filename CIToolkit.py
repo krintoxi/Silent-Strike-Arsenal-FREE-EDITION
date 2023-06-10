@@ -53,6 +53,7 @@ lines = ["""
 ╔═╗┌─┐┬ ┬┌┐┌┌┬┐┌─┐┬─┐  ╦┌┐┌┌┬┐┌─┐┬  ┬  ┬┌─┐┌─┐┌┐┌┌─┐┌─┐  ╔╦╗┌─┐┌─┐┬  ┬┌─┬┌┬┐   
 ║  │ ││ ││││ │ ├┤ ├┬┘  ║│││ │ ├┤ │  │  ││ ┬├┤ ││││  ├┤    ║ │ ││ ││  ├┴┐│ │     
 ╚═╝└─┘└─┘┘└┘ ┴ └─┘┴└─  ╩┘└┘ ┴ └─┘┴─┘┴─┘┴└─┘└─┘┘└┘└─┘└─┘   ╩ └─┘└─┘┴─┘┴ ┴┴ ┴  
+                    The ACCESS KEY is Currently: FREECUBA
 """]              
 
 from time import sleep
@@ -71,7 +72,7 @@ import getpass
 import sys
 from getpass import GetPassWarning
 warnings.filterwarnings("ignore", category=GetPassWarning)
-VALID_KEY = "freecuba"
+VALID_KEY = "FREECUBA"
 def authenticate():
     print("C.I Tool-Kit Authentication")
     print("***************************")
