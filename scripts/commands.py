@@ -35,21 +35,22 @@ lines = ["""
 *******************
 Toolkit ::Commands:
 *******************
-1. (toxicdork) SQL Injection Vulnerability scanner(In DEVELOPMENT) (WORKING)
-2. (sqli) SQL Injector (WORKING)
-3. (vulscan) Vulnerability Scanner (WORKING)
-4. (dinfo) Gather Basic Domain Info (WORKING)
-5. (apf) Admin Page Finder (WORKING)
-6. (hashtype) Identify Hash Type (WORKING)
-7. (hexconv) Hex encoder and decoder (WORKING)
-8. (converters) Web Converters (WORKING)
-9. (steghide) Install, Learn and Use Steghide (WORKING)
-10.(exif) Image Metadata Extractor and Remover (WORKING)
-#.(osint) aids in the process of information gathering (NOT WORKING)
-13.(portscan) Scan for Open ports in target system(WORKING)
-14.(localports) Scans for open Local Network Ports(WORKING)
-15.(noobpasswd) Key/Password cracking tools(NOT WORKING)
-16.(toolbox) Extra Set of Tools (NOT WORKING)
+(toxicdork) - DORK Scanner & SQL Injection Vulnerability (In DEVELOPMENT) (WORKING)
+(tsqli) - T-SQLI Vulnerability Scanner, Multi Thread , s (WORKING)
+(sqli) - SQL Injector & Scanner based on SQLMAP (WORKING)
+(vulscan) - Vulnerability Scanner (WORKING)
+(dinfo)  - Gather Basic Domain Info (WORKING)
+(apf) - Admin Page Finder (WORKING)
+(hashtype) - Identify Hash Type (WORKING)
+(hexconv) - Hex encoder and decoder (WORKING)
+(converters) - Web Converters (WORKING)
+(steghide) - Install, Learn and Use Steghide (WORKING)
+(exif) - Image Metadata Extractor and Remover (WORKING)
+(osint) - aids in the process of information gathering (NOT WORKING)
+(portscan) - Scan for Open ports in target system (WORKING)
+(localports) - Scans for open Local Network Ports(WORKING)
+(noobpasswd) - Key/Password cracking tools(NOT WORKING)
+(ddos) - DDOS script with W.A.F Detection (WORKING)
 
 ******************
 Security Options:

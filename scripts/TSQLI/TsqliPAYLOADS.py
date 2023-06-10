@@ -3,7 +3,7 @@
 payloads = []
 
 # Read payloads from the file
-with open("payloads.txt", "r") as file:
+with open("scripts/TSQLI/payloads.txt", "r") as file:
     for line in file:
         line = line.strip()
         if line:

@@ -435,12 +435,10 @@ def loopfunc():
         cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("python2 tools/pySteg/pysteg.py")
 
-    if choice == "dping":
-        print("----------------------------------")
-        print("     Launching DOS/PING Script     ")
-        print("----------------------------------")
-        tar = input('Target link #Include http://# : ')
-        cmd1 = os.system ("python scripts/dping.pyc -c 10 -t 1000 "+tar )
+    if choice == "ddos":
+        cmd1 = os.system ("python3 scripts/ddos.py")
+    if choice == "tsqli":
+        cmd1 = os.system ("python3 scripts/TSQLI/TSQLI.py")
 
     if choice == "encdns":
         print("---------------------------------------")
