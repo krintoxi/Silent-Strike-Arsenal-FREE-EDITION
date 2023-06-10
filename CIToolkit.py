@@ -78,13 +78,13 @@ def authenticate():
     entered_key = getpass.getpass("Access Key: ")
     if entered_key == VALID_KEY:
         print("***************************")
-        print("\nAuthentication Successful!")
+        print("Authentication Successful!")
         print("********************************************************")
         print("Please run: (update) before the first command.(commands)")
         print("********************************************************")
     else:
         print("xxxxxxxxxxxxxxxxxxxxx")
-        print("\nAccess Denied!")
+        print("Access Denied!")
         print("xxxxxxxxxxxxxxxxxxxxx")
         print("Invalid key. You have been denied access to the C.I Tool-Kit.")
         sys.exit(0)
@@ -108,11 +108,8 @@ def loopfunc():
        ____\////\\\\\\\\\__/\\\__/\\\\\\\\\\\__/\\\_______\/\\\_______ 
         _______\/////////__\///__\///////////__\///________\///________
                         Counter Intelligence Toolkit
-        ****************************
-            Admin Panel Module
-        ****************************
         """)
-            cmd1 = os.system ("perl scripts/finder.pl")
+            cmd1 = os.system ("python3 scripts/APF/APF.py")
 #END OF ADMIN PANEL FINDER
 
 
