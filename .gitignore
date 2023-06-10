@@ -6,3 +6,5 @@ scripts/.DS_Store
 .idea/misc.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .DS_Store
+scripts/TSQLI/__pycache__/TsqliPAYLOADS.cpython-311.pyc
+tsqli.log
