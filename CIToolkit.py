@@ -263,7 +263,7 @@ def loopfunc():
                 
     if choice == "dvpn":
         print("""
-                ________/\\\\\\\\\________/\\\\\\\\\\\________/\\\\\\\\\\\\\\\_        
+________/\\\\\\\\\________/\\\\\\\\\\\________/\\\\\\\\\\\\\\\_        
  _____/\\\////////________\/////\\\///________\///////\\\/////__       
   ___/\\\/_____________________\/\\\_________________\/\\\_______      
    __/\\\_______________________\/\\\_________________\/\\\_______     
@@ -354,10 +354,7 @@ def loopfunc():
         print("----------------------------------")
         print(" **Launching Hash Identify Script**")
         print("----------------------------------")
-        print("The Toolkit Script requires Tor and Python2.")
-        print("Please follow the on screen install.")
-        cmd1 = os.system ("sudo apt-get install python2")
-        cmd1 = os.system ("python2 scripts/Hash_ID.pyc")
+        cmd1 = os.system ("python3 scripts/HashID/HID.py")
 
     if choice == "numconverter":
         print("----------------------------------")
