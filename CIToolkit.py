@@ -336,7 +336,7 @@ ________/\\\\\\\\\________/\\\\\\\\\\\________/\\\\\\\\\\\\\\\_
         print("***********************************************")
         print(" ##Launching Domain Whois Information Script## ")
         print("***********************************************")
-        cmd1 = os.system ("python3 scripts/dns.py")
+        cmd1 = os.system ("python3 scripts/DNS/dns.py")
 
     if choice == "hash type" or choice == "hashtype" or choice == "tipo de hash":
         print("""
@@ -431,7 +431,7 @@ ________/\\\\\\\\\________/\\\\\\\\\\\________/\\\\\\\\\\\\\\\_
         cmd1 = os.system ("python2 tools/pySteg/pysteg.py")
 
     if choice == "ddos":
-        cmd1 = os.system ("python3 scripts/ddos.py")
+        cmd1 = os.system ("python3 scripts/DDOS/ddos.py")
     if choice == "tsqli":
         cmd1 = os.system ("python3 scripts/TSQLI/TSQLI.py")
 
@@ -489,7 +489,7 @@ ________/\\\\\\\\\________/\\\\\\\\\\\________/\\\\\\\\\\\\\\\_
         ********************************
         """)
         cmd1 = os.system ("python3 scripts/macspoof.py")
-
+    #IMAGE MATADATE
     if choice == "exif":
         print("----------------------------------------------")
         print("Launching IMAGE METADATA EXTRACTOR AND REMOVER")
@@ -500,9 +500,10 @@ ________/\\\\\\\\\________/\\\\\\\\\\\________/\\\\\\\\\\\\\\\_
         cmd1 = os.system ('sudo apt-get install libimage-exiftool-perl')
         cmd1 = os.system ('python2 scripts/exifpwn.pyc')
         print("Launched!")
-
+    #Start Of Local Port Scan
     if choice =="localports":
         cmd1 = os.system ("python3 scripts/portscanLOCAL.py")
+    #End Of Local Port Scan
     if choice == "portscan":
         cmd1 = os.system("python3 scripts/portscanNET.py")    
     if choice == "sqlscan":
@@ -524,28 +525,21 @@ ________/\\\\\\\\\________/\\\\\\\\\\\________/\\\\\\\\\\\\\\\_
         print("Please follow the on screen install.")
         cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system("python2 scripts/noobcrack.py")
-
      #EASTEREGGS   
     if choice == "wle":
         print ("-----------------------------")
         email_db = input("Podesta or DNC?:")
         cmd1 = os.system("python scripts/WikileaksEmailDownloader.py --start 1 --end  -1 --retries 5 "+email_db)
-        
     if choice == "vpn":
         print("Starting VPN (BITMASK)")
         cmd1 = os.systen ("sh tools/vpn/./bitmask")
         cmd1 = os.system ("bitmask")
-
     #Testing Toxic Crawler
     if choice == "toxicdork":
         print("The Toolkit Script requires Tor and Python2.")
         print("Please follow the on screen install.")
         cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("python2 scripts/Tox1cDorkeR.py")
-
-
-
-    #        
 	#if choice == "tcrawl":
 	#	print("Starting Toxic Crawler")
 	#	cmd1 = os.system ("python IN DEVELOPMENT SCRIPTS/ToxicCrawler/ToxicCrawler.py")

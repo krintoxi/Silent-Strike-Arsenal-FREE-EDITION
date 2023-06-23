@@ -23,7 +23,7 @@ Security Options:
 1. (spoof my mac) (MAC ADDRESS SPOOF WIFI/ETH) (WORKING)
 2. (itor) install Tor  (WORKING)
 3. (stor) Start Tor  (WORKING)
-4. (tors) Check Tor Status (WORKING)
+4. (tors) Check Tor Status (WORKIsNG)
 6. (vpn) G.U.I VPN Launcher(WORKING) 
 7. (encdns) Encrypt DNS (WORKING)
 8. (anonsearch) Anonymous TOR routed web search(WORKING - NEEDS ATTENTION)
@@ -32,7 +32,7 @@ Security Options:
 
 (quit) - (home) - (clear) - (update) - (terminal)
 
-~~~2022 EDITION~~~
+~~~2023 EDITION~~~
 
                                 (C.I.T)                                       
                         -Krintoxi  (Leo Edge)                                  
