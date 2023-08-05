@@ -22,7 +22,7 @@ if __name__ == "__main__":
     ⠀⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
     ⠀⣿⣿⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀
     ⠀⢿⣿⡆⠀⠀⠀⠻⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⣿⣿⣿⣿⡇⠀
-    ⠀⠸⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⣿⡇⠀
+    ⠀⠸⣿⣧⡀⠀  ALPHA#66⠈⠙⢿⣿⡇⠀
     ⠀⠀⠛⢿⣿⣦⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣶⣿⡇⠀⠀
     ⠀⠀⠀⠀⠈⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠁⠀⠀⠀
     ⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠿⠛⠉
@@ -37,7 +37,7 @@ def install_required_packages():
     except ImportError:
         print("Installing required packages...")
         try:
-            subprocess.run(["pip", "install", "questionary", "matplotlib", "tabulate"], check=True)
+            subprocess.run(["pip", "install", "questionary", "matplotlib", "tabulate","sqlite3",], check=True)
         except subprocess.CalledProcessError as e:
             print("Error installing required packages. Make sure you have pip installed.")
             sys.exit(1)
@@ -106,6 +106,11 @@ def create_tables():
             file_name TEXT NOT NULL,
             file_url TEXT NOT NULL
         )''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS notes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            note_title TEXT NOT NULL,
+            note_content TEXT NOT NULL
+        )''')
 
     conn.commit()
     conn.close()
@@ -144,19 +149,24 @@ def admin_login():
     if count == 0:
         print("Admin not registered. Please register first.")
         sys.exit(1)
-
+    print("*********************")
     print("Admin login required.")
-    admin_username = q.text("Admin Username:").ask()
-    admin_password = q.password("Admin Password:").ask()
+    print("*********************")
+    admin_username = q.text("Admin Username #").ask()
+    admin_password = q.password("Admin Password #").ask()
     hashed_password = hash_password(admin_password)
 
     cursor.execute("SELECT COUNT(*) FROM admin WHERE username = ? AND password_hash = ?", (admin_username, hashed_password))
     count = cursor.fetchone()[0]
     if count == 0:
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         print("Admin login failed. Incorrect credentials.")
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         sys.exit(1)
-
+    print("************************")
     print("Admin login successful.")
+    print("************************")
+
     conn.close()
 
 def main():
@@ -638,10 +648,10 @@ def main_menu():
         print("2. Target Agents")
         print("3. Vulnerable Domains")
         print("4. Communist Agents")
-        print("5. Shells")
-        print("6. Export Report")
-        print("7. Take Notes")
-        print("8. Manage Interesting Files")
+        print("5. Manage Deployed Shells")
+        print("6. Manage Interesting Files")
+        print("7. Manage Notes")
+        print("8. Export Report")
         print("0. Exit")
         choice = q.text("Enter your choice:").ask()
 
@@ -655,11 +665,11 @@ def main_menu():
             communist_agents_menu()
         elif choice == "5":
             shells_menu()
-        elif choice == "6":
+        elif choice == "8":
             export_report_menu()
         elif choice == "7":
             take_notes_menu()
-        elif choice == "8":
+        elif choice == "6":
             manage_interesting_files_menu()
         elif choice == "0":
             sys.exit()
@@ -827,7 +837,6 @@ def export_report_menu():
     while True:
         print("\n---------- Export Report Menu ----------")
         print("1. Export to Text File")
-        print("2. Export to HTML")
         print("0. Back to Main Menu")
         choice = q.text("Enter your choice:").ask()
 
@@ -840,32 +849,57 @@ def export_report_menu():
         else:
             print("Invalid choice. Please try again.")
 
+from tabulate import tabulate
+
 def export_to_text_file():
     filename = q.text("Enter the filename for the text report:").ask()
 
     with open(filename, "w") as file:
-        file.write("---------- Control Panel Report ----------\n")
-        file.write("---------- Target Companies ----------\n")
+        file.write("##########################################################\n")
+        file.write("⢀⡠⣤⣶⣶⣦⣄⠀⠀OMEGA_7⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n")
+        file.write("⣿⡟⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⣠⣤⡄⠀⢀⣴⣶⡄\n")
+        file.write("⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣀⣀⣴⣿⣿⣿⣾⣿⣿⣿⡇\n")
+        file.write("⢿⣇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁\n")
+        file.write("⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀\n")
+        file.write("⠀⠉⠛⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀\n")
+        file.write("⠀⠀⠀⠀⠀⠈⠙⠛⠿⣿⣿⣿⣿⠿⠋⠁⠀⠀⠀⠀⠀\n")
+        file.write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀1976⠀⠀⠀⠀⠀⠀\n")
+        file.write("##########################################################\n\n")
+        file.write("   *** C.I.T Control Panel Report - Classified ***\n\n")
+        file.write("##########################################################\n\n")
+        file.write("-----===[ Target Companies ]===-----\n")
         file.write(tabulate(get_table_data("target_companies"), headers=["ID", "Company Name", "Industry", "Contact Info", "Description"], tablefmt="grid"))
         file.write("\n\n")
 
-        file.write("---------- Target Agents ----------\n")
+        file.write("-----===[ Target Agents ]===-----\n")
         file.write(tabulate(get_table_data("target_agents"), headers=["ID", "Agent Name", "Position", "Contact Info", "Assigned Company"], tablefmt="grid"))
         file.write("\n\n")
 
-        file.write("---------- Vulnerable Domains ----------\n")
+        file.write("-----===[ Vulnerable Domains ]===-----\n")
         file.write(tabulate(get_table_data("vulnerable_domains"), headers=["ID", "Domain Name", "Vulnerability Type", "Risk Level", "Affected Company"], tablefmt="grid"))
         file.write("\n\n")
 
-        file.write("---------- Communist Agents ----------\n")
+        file.write("-----===[ Communist Agents ]===-----\n")
         file.write(tabulate(get_table_data("communist_agents"), headers=["ID", "Name", "Country", "Communist Party", "Personal Info"], tablefmt="grid"))
         file.write("\n\n")
 
-        file.write("---------- Shells ----------\n")
+        file.write("-----===[ Shells ]===-----\n")
         file.write(tabulate(get_table_data("shells"), headers=["ID", "Name", "Location", "Type", "Capacity"], tablefmt="grid"))
         file.write("\n\n")
 
-    print("Report exported to", filename)
+        file.write("-----===[ Notes ]===-----\n")
+        file.write(tabulate(get_table_data("notes"), headers=["ID", "note_title", "note_content"], tablefmt="grid"))
+        file.write("\n\n")
+
+        file.write("-----===[ Interesting Files ]===-----\n")
+        file.write(tabulate(get_table_data("interesting_files"), headers=["ID", "file_name", "file_url"], tablefmt="grid"))
+        file.write("\n\n")
+        file.write("InterCuba.Net - Krintoxi\n")
+    print("")
+    print("***********************************************************************************")
+    print("Report exported as a text file named : (", filename,") Check The Toolkit Directory.")
+    print("***********************************************************************************")
+
 
 def get_table_data(table_name):
     conn = connect_db()
@@ -903,7 +937,7 @@ def create_note():
     conn = connect_db()
     cursor = conn.cursor()
 
-    cursor.execute("INSERT INTO notes (title, content) VALUES (?, ?)", (note_title, note_content))
+    cursor.execute("INSERT INTO notes (note_title, note_content) VALUES (?, ?)", (note_title, note_content))
     conn.commit()
 
     print("Note created successfully.")
@@ -932,8 +966,8 @@ def edit_note():
     new_value = q.text("Enter the new value:").ask()
 
     fields = {
-        "1": "title",
-        "2": "content"
+        "1": "note_title",
+        "2": "note_content"
     }
 
     if field in fields:
