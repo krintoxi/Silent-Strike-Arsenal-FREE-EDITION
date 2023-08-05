@@ -28,11 +28,6 @@ To wield the powers of CIToolkit.py, follow these encrypted steps:
 
 2. Verify you possess Python 3.x on your terminal battlefield.
 
-3. To safeguard your toolkit, install the required dependencies with this incognito command:
-```
-sudo apt-get install python2 python3 python3-pip xterm git
-```
-
 ## Usage
 
 To unlock the secrets of CIToolkit.py, execute the script from your terminal stronghold:
