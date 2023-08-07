@@ -21,16 +21,20 @@ CIToolkit.py is a versatile Python script, meticulously crafted to offer an exte
 - **Project Management Features:** Take control of your covert missions with exceptional project management functionalities. Manage tasks, compile intelligence, and maintain seamless collaboration.
 
 ## Installation
-
-To wield the powers of CIToolkit.py, follow these encrypted steps:
-
-1. Download the script [CIToolkit.py](https://github.com/krintoxi/C.I.T/blob/main/CIToolkit.py) and cloak it in your project directory.
-
-2. Verify you possess Python 3.x on your terminal battlefield.
-
+```
 ## Usage
 
 To unlock the secrets of CIToolkit.py, execute the script from your terminal stronghold:
+----------------------------------------------------------------------------------------
+First Run!? No Problem. First Paste These Commands to auto install everything you need.
+            
+            (This works the same on MacOS or Linux. Windows is UNTESTED)
+            
+1. pip install --upgrade pip setuptools
+2. pip install pcapy 
+3. pip install scapy
+4. python install_requirements.py (This will attempt to install everything else for you.)
+5. Then Finally then you can go ahead and boot up, CIToolkit.py and get to work!
 
 ```
 python3 CIToolkit.py

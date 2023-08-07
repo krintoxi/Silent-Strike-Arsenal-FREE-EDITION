@@ -107,3 +107,4 @@ This project is licensed under a private license, and all rights are reserved by
 ---
 
 We hope this T-SQL Injection (TSQLI) Detection Tool helps strengthen your security efforts and enhances your ability to identify and mitigate SQL injection vulnerabilities. Remember to use this tool responsibly and in accordance with your organization's security policies. If you have any questions or need assistance, please refer to your internal security team or relevant experts within your organization.
+InterCuba.Net
