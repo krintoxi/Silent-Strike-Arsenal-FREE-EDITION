@@ -1,40 +1,119 @@
-print(""" # Tools
+import webbrowser
+print('''
+[*] InterCuba.Net
+\033[1;31;40m Krintoxi  \n
+⠀⠀⠀⠀⠀⠀                      ⠀⢀⣀⣠⣴⣶⣶⣶⣾⣿⣿⣿⣿⣿⣷⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⠿⠿⠛⠛⠛⠋⠉⠉⠁⠀⠀⠈⠛⠿⢿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠟⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣶⣶⣶⣶⣶⡄⠀⠀⢹⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇ 75 ⣿⡇⠀⠀⠈⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⡿⠁⠀⠀⠀⠀⠀⣠⡄⠀⠀⠀⠀⠀⠀⠀⠀⢻⣇⠀x⢀⣿⠇⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠀⠀⠀⠀⠀⠀⣰⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⢷⣶⠿⠋⠀⠀⠀⢸⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⠃⠀⠀⠀⠀⢀⣴⣿⣥⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀⠀⢀⣴⣿⣋⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣽⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣷⣶⣤⣶⠿⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠙⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢻⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀o⠀⠀⠀⠀⢀⣾⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀o⠀⠀⠀⣾⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠀#SOSCUBA⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣴⣾⣿⣿⣷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⣿⣦⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⣾⣿⣿⠿⣿⡏⠉⠀⠈⠛⢿⣶⣤⣄⣀⣀⣤⣴⣶⠟⠋⠀⠉⠙⢻⣿⣿⣿⣷⣶⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣶⣾⣿⣿⠿⠟⠛⣿⡆⠀⠘⣿⡄⠀⠀⠀⣠⣾⠟⢉⣿⣯⠙⢿⣦⣄⠀⠀⠀⢀⣾⠏⠀⢨⣿⠛⠻⢿⣿⣿⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢀⣠⣴⣾⣿⣿⠿⠟⠋⠉⠀⠀⠀⣀⣼⣿⠄⠀⠙⣿⡀⢀⣼⡟⠁⠀⣸⡟⢻⣆⠀⠈⢿⣇⠀⢀⣾⠏⠀⢠⣾⣇⡀⠀⠀⠀⠉⠙⠻⠿⣿⣿⣶⣦⣄⡀⠀⠀⠀
+⠀⠀⢠⣿⣿⠟⠋⢻⣧⠀⣀⣠⣴⡾⠟⠛⠉⠀⠀⠀⠀⠹⣿⣸⡿⣷⡄⣰⡿⠀⠘⣿⡆⢀⣾⢿⣄⣾⠏⠀⠀⠀⠈⠛⠻⠿⣦⣤⣀⡀⠀⠀⣼⡟⠛⠻⣿⣷⠀⠀⠀
+⠀⠀⣼⣿⡇⠀⠀⠈⢿⡷⠿⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⠃⠘⢿⣿⠃⠀⠀⠘⣿⡿⠃⠘⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠻⢶⣶⡿⠁⠀⠀⢻⣿⣧⠀⠀
+⠀⢀⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⣧⡀⢀⣾⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠈⣿⣿⠀⠀
+⠀⢸⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⡿⠋⠀⠀⢀⡀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡆⠀
+⠀⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⢸⡟⠛k⢻r⠛i⠛n⠛t⣿ox⢻i⣯⠀⠀⠀⠀⠀⠀⢹⣿⡇⠀
+⢀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀xxxxx⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠸⠿⠾⠷⠾⠿⠾⠿⠷⠿⠿⠿⠿⠾⠟⠿⠿⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀
+⢸⣿⡟⠀⠀⠀⠀⠀⠀⠀xxxxxxxxxxx⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⠀
+⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣽⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡀
+⢾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇
+''')
+import webbrowser
 
-##### **PHP deobfuscators**:
+def open_link(link):
+    webbrowser.open_new_tab(link)
 
-###### *Online*:
-* FOPO PHP Deobfuscator [ver. 0.1](https://glot.io/snippets/ee5mzg3zf1) | [ver. 0.2](https://glot.io/snippets/efruafhnez)
-* [Sucuri's PHP decoder](http://ddecode.com/phpdecoder/)
-* [Toolki's PHP decoder](http://toolki.com/en/php-decoder/)
-* [unPHP](https://www.unphp.net/)
+def hacker_menu():
+    print("╔════════════════════════════╗")
+    print("║        Hacker Menu         ║")
+    print("╠════════════════════════════╣")
+    print("║ Options:                   ║")
+    print("║ 1. PHP Deobfuscators       ║")
+    print("║ 2. PHP Beautifiers         ║")
+    print("║ 3. PHP Testers             ║")
+    print("║ Q. Quit                    ║")
+    print("╚════════════════════════════╝")
 
-###### *Offline*:
-* [PHP Converter](http://www.kahusecurity.com/downloads/PHPConverter_v0.3.7z)
-* [PHP Script Decoder](http://www.kahusecurity.com/downloads/PHPScriptDecoder_v0.1.7z)
+    while True:
+        choice = input("Enter your choice: ").strip().lower()
 
-*Note*: check out KahuSecurity's site [directly](http://www.kahusecurity.com) for latest versions of these tools.
+        if choice == 'q':
+            print("Goodbye!")
+            break
+        elif choice == '1':
+            open_category_links("PHP deobfuscators")
+        elif choice == '2':
+            open_category_links("PHP beautifiers")
+        elif choice == '3':
+            open_category_links("PHP testers")
+        else:
+            print("Invalid choice. Try again.")
 
+def open_category_links(category):
+    for tool in tools:
+        if tool["category"].lower() == category.lower():
+            print(f"\nOpening {tool['category']} links:\n")
+            for link in tool.get("online", []):
+                print(f"* {link}")
+                open_link(link)
+            for link in tool.get("offline", []):
+                print(f"* {link}")
+                open_link(link)
+            break
+    else:
+        print("Category not found.")
 
-##### **PHP beautifiers**:
-* [Dan's PHP beautify](http://www.cleancss.com/php-beautify/)
-* [PHP beautifier](http://phpbeautifier.com/)
-* [PHP formatter](http://beta.phpformatter.com/)
+tools = [
+    {
+        "category": "PHP deobfuscators",
+        "online": [
+            "https://glot.io/snippets/ee5mzg3zf1",
+            "https://glot.io/snippets/efruafhnez",
+            "http://ddecode.com/phpdecoder/",
+            "http://toolki.com/en/php-decoder/",
+            "https://www.unphp.net/"
+        ],
+        "offline": [
+            "http://www.kahusecurity.com/downloads/PHPConverter_v0.3.7z",
+            "http://www.kahusecurity.com/downloads/PHPScriptDecoder_v0.1.7z"
+        ]
+    },
+    {
+        "category": "PHP beautifiers",
+        "online": [
+            "http://www.cleancss.com/php-beautify/",
+            "http://phpbeautifier.com/",
+            "http://beta.phpformatter.com/"
+        ]
+    },
+    {
+        "category": "PHP testers",
+        "online": [
+            "http://www.runphponline.com/",
+            "http://phpfiddle.org/",
+            "http://sandbox.onlinephpfunctions.com/",
+            "http://phptester.net/"
+        ],
+        "offline": [
+            "http://www.easyphp.org/",
+            "https://www.apachefriends.org/index.html"
+        ]
+    }
+]
 
-
-##### **PHP testers**:
-
-###### *Online*:
-* [PHP Editor](http://www.runphponline.com/)
-* [PHPFiddle](http://phpfiddle.org/)
-* [PHP Sandbox](http://sandbox.onlinephpfunctions.com/)
-* [PHP Tester](http://phptester.net/)
-
-###### *Offline*:
-* [EasyPHP](http://www.easyphp.org/)
-* [XAMPP](https://www.apachefriends.org/index.html)
-
-
-## Notes
-* Always investigate malware in a secure environment. This means: seperately from your network and in a virtual machine!
-* Some backdoors may be backdoored *(yes, really)*. Don't ever use this for any malicious purposes.
-""")
+if __name__ == "__main__":
+    hacker_menu()

@@ -6,6 +6,7 @@ import sys
 
 def install_requirements():
     requirements = ["scapy", "psutil","netifaces","colorama"]
+
     try:
         for requirement in requirements:
             subprocess.check_call([sys.executable, "-m", "pip", "install", requirement])
