@@ -1,14 +1,43 @@
 import sys
 import os
-cmd1 = os.system ("sudo apt-get install steghide")
-cmd1 = os.system ("sudo apt-get install xterm ")
-print ("!!!!!!!!!!!!!!!!!!!!!!!!!!")
-print ("!	Steghide  Options	!")		
-print ("!!!!!!!!!!!!!!!!!!!!!!!!!!")
-print ("USAGE EXAMPLE :")
+def run_command(command):
+    os.system(command)
+print("\n!!!!!!!!!!!!!!!!!!!!!!!!!!")
+print("!   Steghide  Options   !")
+print("!!!!!!!!!!!!!!!!!!!!!!!!!!")
+print("USAGE EXAMPLE :")
 print("""
-steghide version 0.5.1
-
+⠀⠀⠀⠀⠀                      ⠀⢀⣀⣠⣴⣶⣶⣶⣾⣿⣿⣿⣿⣿⣷⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⠿⠿⠛⠛⠛⠋⠉⠉⠁⠀⠀⠈⠛⠿⢿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠟⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣶⣶⣶⣶⣶⡄⠀⠀⢹⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇ 75 ⣿⡇⠀⠀⠈⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⡿⠁⠀⠀⠀⠀⠀⣠⡄⠀⠀⠀⠀⠀⠀⠀⠀⢻⣇⠀x⢀⣿⠇⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠀⠀⠀⠀⠀⠀⣰⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⢷⣶⠿⠋⠀⠀⠀⢸⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⠃⠀⠀⠀⠀⢀⣴⣿⣥⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀⠀⢀⣴⣿⣋⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣽⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣷⣶⣤⣶⠿⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠙⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢻⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀o⠀⠀⠀⠀⢀⣾⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀o⠀⠀⠀⣾⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠀#SOSCUBA⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣴⣾⣿⣿⣷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⣿⣦⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⣾⣿⣿⠿⣿⡏⠉⠀⠈⠛⢿⣶⣤⣄⣀⣀⣤⣴⣶⠟⠋⠀⠉⠙⢻⣿⣿⣿⣷⣶⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣶⣾⣿⣿⠿⠟⠛⣿⡆⠀⠘⣿⡄⠀⠀⠀⣠⣾⠟⢉⣿⣯⠙⢿⣦⣄⠀⠀⠀⢀⣾⠏⠀⢨⣿⠛⠻⢿⣿⣿⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢀⣠⣴⣾⣿⣿⠿⠟⠋⠉⠀⠀⠀⣀⣼⣿⠄⠀⠙⣿⡀⢀⣼⡟⠁⠀⣸⡟⢻⣆⠀⠈⢿⣇⠀⢀⣾⠏⠀⢠⣾⣇⡀⠀⠀⠀⠉⠙⠻⠿⣿⣿⣶⣦⣄⡀⠀⠀⠀
+⠀⠀⢠⣿⣿⠟⠋⢻⣧⠀⣀⣠⣴⡾⠟⠛⠉⠀⠀⠀⠀⠹⣿⣸⡿⣷⡄⣰⡿⠀⠘⣿⡆⢀⣾⢿⣄⣾⠏⠀⠀⠀⠈⠛⠻⠿⣦⣤⣀⡀⠀⠀⣼⡟⠛⠻⣿⣷⠀⠀⠀
+⠀⠀⣼⣿⡇⠀⠀⠈⢿⡷⠿⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⠃⠘⢿⣿⠃⠀⠀⠘⣿⡿⠃⠘⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠻⢶⣶⡿⠁⠀⠀⢻⣿⣧⠀⠀
+⠀⢀⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⣧⡀⢀⣾⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠈⣿⣿⠀⠀
+⠀⢸⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⡿⠋⠀⠀⢀⡀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡆⠀
+⠀⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⢸⡟⠛k⢻r⠛i⠛n⠛t⣿ox⢻i⣯⠀⠀⠀⠀⠀⠀⢹⣿⡇⠀
+⢀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀xxxxx⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠸⠿⠾⠷⠾⠿⠾⠿⠷⠿⠿⠿⠿⠾⠟⠿⠿⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀
+⢸⣿⡟⠀⠀⠀⠀⠀⠀⠀xxxxxxxxxxx⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⠀
+⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣽⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡀
+⢾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇
+A new terminal window will open on your system.
+*********************************************************************
 the first argument must be one of the following:
  embed, --embed          embed data
  extract, --extract      extract data
@@ -18,7 +47,7 @@ the first argument must be one of the following:
  version, --version      display version information
  license, --license      display steghide's license
  help, --help            display this usage information
-
+ 
 embedding options:
  -ef, --embedfile        select file to be embedded
    -ef <filename>        embed the file <filename>
@@ -55,9 +84,26 @@ options for the info command:
  -p, --passphrase        specify passphrase
    -p <passphrase>       use <passphrase> to get info about embedded data
 
-To embed emb.txt in cvr.jpg: steghide embed -cf cvr.jpg -ef emb.txt
-To extract embedded data from stg.jpg: steghide extract -sf stg.jpg
+*************************************************************************
+As an example of what to run on your fresh terminal:
+*************************************************************************
+Example: To embed emb.txt in cvr.jpg: steghide embed -cf cvr.jpg -ef emb.txt
+-----------______------------------------------------------------------------
+Example: To extract embedded data from stg.jpg: steghide extract -sf stg.jpg
+------------________---------------------------------------------------------
+    """)
+print('Type "exit" to close the steghide terminal')
+import platform
+import subprocess
 
-	""")
-print ("Type ""exit"" to close steghide terminal")
-cmd1 = os.system ("xterm")
+def open_new_terminal():
+    system = platform.system()
+    if system == "Linux":
+        subprocess.run(["x-terminal-emulator"])
+    elif system == "Darwin":
+        subprocess.run(["open", "-a", "Terminal"])
+    else:
+        print("Unsupported operating system")
+
+open_new_terminal()
+

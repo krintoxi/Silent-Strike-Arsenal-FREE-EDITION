@@ -1,14 +1,10 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
-import sys
-import getpass
 if __name__ == "__main__":
     with open("scripts/PANEL/logos/mainlogo.txt", "r") as f:
         hacker_art = f.read()
 
     print("\033[32m" + hacker_art + "\033[0m")
-from time import sleep
 #Start Of Authentication
 import warnings
 import getpass
@@ -160,13 +156,13 @@ def loopfunc():
                 hacker_art = f.read()
 
             print("\033[32m" + hacker_art + "\033[0m")
-        print ("*****************************************************")
-        print ("Downloading ans installing BitMask (RiseUp.Net) V.P.N")
-        print ("*****************************************************") 
-        cmd1 = os.system ("echo 'deb http://deb.bitmask.net/debian wheezy main' | sudo tee -a /etc/apt/sources.list.d/bitmask.list")    
-        cmd1 = os.system ("curl https://dl.bitmask.net/apt.key | sudo apt-key add -")
-        cmd1 = os.system ("sudo apt-get update")
-        cmd1 = os.system ("sudo apt-get install bitmask leap-keyring")
+        print("*****************************************************")
+        print("Downloading ans installing BitMask (RiseUp.Net) V.P.N")
+        print("*****************************************************")
+        cmd1 = os.system("echo 'deb http://deb.bitmask.net/debian wheezy main' | sudo tee -a /etc/apt/sources.list.d/bitmask.list")
+        cmd1 = os.system("curl https://dl.bitmask.net/apt.key | sudo apt-key add -")
+        cmd1 = os.system("sudo apt-get update")
+        cmd1 = os.system("sudo apt-get install bitmask leap-keyring")
 
     if choice == "shells":
         if __name__ == "__main__":
@@ -286,12 +282,12 @@ def loopfunc():
 
     if choice == "steghide":
         print("----------------------------------")
-        print("       **Launching Steghide GUI**")
+        print("   **Launching Steghide GUI      **")
         print("----------------------------------")
         print("The Toolkit Script requires Tor and Python2.")
         print("Please follow the on screen install.")
         cmd1 = os.system ("sudo apt-get install python2")
-        cmd1 = os.system ("python2 tools/pySteg/pysteg.py")
+        cmd1 = os.system ("python tools/pySteg/pysteg.py")
 
     if choice == "ddos":
         cmd1 = os.system ("python3 scripts/DDOS/ddos.py")
@@ -332,8 +328,7 @@ def loopfunc():
 
     if choice == "exit" or choice == "quit" or choice == "q":
         sys.exit()
-        print("Finished!") 
-    
+
     if choice == "toolbox":
         print("""
         ####################
@@ -395,7 +390,7 @@ def loopfunc():
         cmd1 = os.system("python scripts/WikileaksEmailDownloader.py --start 1 --end  -1 --retries 5 "+email_db)
     if choice == "vpn":
         print("Starting VPN (BITMASK)")
-        cmd1 = os.systen ("sh tools/vpn/./bitmask")
+        cmd1 = os.system ("sh tools/vpn/./bitmask")
         cmd1 = os.system ("bitmask")
     #Testing Toxic Crawler
     if choice == "toxicdork":
