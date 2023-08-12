@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 if __name__ == "__main__":
     ascii_art = """
                              ⠄⠄⠄⠄⠄⠄⣀⣀⣤⣤⣴⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣦⣤⣤⣄⣀⡀⠄⠄⠄⠄⠄
@@ -42,10 +43,14 @@ import sys
 
 for line in lines:          # for each line of text (or each message)
     for c in line:          # for each character in each line
-        print(c, end='')    # print a single character, and keep the cursor there.
+        if sys.version_info >= (3, 0):
+            print(c, end='')  # Python 3.x
+        else:
+            sys.stdout.write(c)  # Python 2.x
         sys.stdout.flush()  # flush the buffer
         sleep(0.01)          # wait a little to make the effect look good.
     print('')               # line break (optional, could also be part of the message)
+
 
 from cryptography.fernet import Fernet
 import random
