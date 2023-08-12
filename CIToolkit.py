@@ -401,6 +401,10 @@ def loopfunc():
     #T-Cipher Module For C.I Toolkit
     if choice == "t-cipher":
         cmd1 = os.system("python3 scripts/TCipher/T-Cipher.py")
+    # Firewall Module For C.I Toolkit
+    if choice == "firewall":
+        cmd1 = os.system("python3 scripts/FIREWALL/install_requirements.py")
+        cmd1 = os.system("sudo python3 scripts/FIREWALL/Firewall.py linux")
 
 
 	#if choice == "tcrawl":

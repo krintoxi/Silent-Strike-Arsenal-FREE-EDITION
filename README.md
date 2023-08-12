@@ -1,95 +1,96 @@
-# Counter intelligence Toolkit
+# Counter Intelligence Toolkit (CIToolkit.py)
 
 ## Introduction
 
-Welcome to CIToolkit.py! This script is your ultimate cyber arsenal—a powerful Python library designed to be your trusted companion for various cybersecurity, data analysis, and project management tasks. Whether you're a cyber warrior, data sage, or project maestro, CIToolkit.py empowers you to conquer your missions with ease and efficiency.
+Welcome to the Counter Intelligence Toolkit (CIToolkit.py)! This powerful Python script is designed to be your ultimate companion for cybersecurity, data analysis, and project management tasks. Whether you're a cybersecurity professional, data analyst, or project manager, CIToolkit.py equips you with an array of tools to accomplish your missions efficiently.
 
 ## Description
 
-CIToolkit.py is a versatile Python script, meticulously crafted to offer an extensive array of functions and utilities. This modular script is organized into several categories, each housing a secret cache of tools:
+CIToolkit.py is a modular and versatile Python script that offers a wide range of functions and utilities. Organized into distinct categories, each containing a collection of tools, the script empowers you in various aspects of your work:
 
-- **Authentication:** Gain access to the C.I Tool-Kit's sanctum with an access key, protecting its invaluable resources.
+- **Authentication:** Gain access to the toolkit's features by using a secure access key. This ensures that only authorized users can utilize its capabilities.
 
-- **Admin Panel Finder:** Stealthily infiltrate websites by discovering elusive admin panels with ease.
+- **Admin Panel Finder (`apf`):** Quickly identify hidden admin panels on websites. The `APF.py` script locates these entry points, facilitating website exploration.
 
-- **Terminal Access:** Access a secure terminal, empowering you to execute commands from the shadows.
+- **Terminal Access (`terminal`):** Access a secure terminal environment. If the required terminal emulator isn't available, it will be automatically installed.
 
-- **Cybersecurity Utilities:** Arm yourself with the latest in cybersecurity weaponry. Scan domains, unearth vulnerabilities, and track elusive agents.
+- **Cybersecurity Utilities (`sqli`, `vulscan`, `hash type`, and more):** Employ a diverse set of cybersecurity tools. Detect SQL injections, scan for vulnerabilities, and analyze cryptographic hashes.
 
-- **Data Analysis Tools:** Unleash your data mastery with functions for manipulation, exploration, and visualization. Analyze datasets, generate insightful reports, and reveal hidden patterns.
+- **Data Analysis Tools (`analyze_dataset`, `generate_report`, `visualize_data`, and more):** Harness the power of data analysis. Break down datasets, create insightful reports, and visualize data patterns.
 
-- **Project Management Features:** Take control of your covert missions with exceptional project management functionalities. Manage tasks, compile intelligence, and maintain seamless collaboration.
+- **Project Management Features (`panel`):** Control your covert operations with effective project management tools. Manage tasks, gather intelligence, and enhance collaboration.
 
-## Installation
-```
-## Usage
+- **System Information (`sys`):** Explore system details using the `lsb_release -a` command. Gain insights into the environment you're operating within.
 
-To unlock the secrets of CIToolkit.py, execute the script from your terminal stronghold:
-----------------------------------------------------------------------------------------
-First Run!? No Problem. First Paste These Commands to auto install everything you need.
-            
-            (This works the same on MacOS or Linux. Windows is UNTESTED)
-            
-1. pip install --upgrade pip setuptools
-2. pip install pcapy 
-3. pip install scapy
-4. python install_requirements.py (This will attempt to install everything else for you.)
-5. Then Finally then you can go ahead and boot up, CIToolkit.py and get to work!
+- **Misc Options (`itor`, `stor`, `tors`, `dvpn`, `shells`, `phptools`, and more):** Expand your toolkit with versatile functionalities. Configure Tor, access shells, utilize PHP tools, and more.
 
-```
-python3 CIToolkit.py
-```
+- **Local and Network Port Scanning (`localports`, `portscan`):** Scan local and network ports discreetly. Gather information about potential vulnerabilities.
 
-Upon initiation, the C.I Tool-Kit's guardians will request your access key. Once validated, you'll enter the covert main menu, ready to select options tailored to your objectives.
+- **Open-Source Intelligence (OSINT) (`osint`):** Harness the power of OSINT with the OSINT script. Uncover information from publicly available sources.
 
-## Features and Options
+- **Image Metadata Extraction and Removal (`exif`):** Analyze image metadata using the `exifpwn.py` script. Extract and sanitize metadata to unveil hidden insights.
 
-### Admin Panel Finder (`apf`)
+- **Local MAC Address Spoofing (`spoof my mac`):** Protect your anonymity by changing your device's MAC address using the `macspoof.py` script.
 
-Reveal the hidden entry points to website domains. Engage the `APF.py` script to locate elusive admin panels.
+- **Easter Eggs (`wle`, `vpn`):** Discover hidden gems within the script for surprises and delights.
 
-### Terminal Access (`terminal`)
+## Installation and Usage
 
-Gain access to a secure terminal. If the `xterm` terminal emulator is absent, it shall be forged.
+To begin using CIToolkit.py, follow these steps:
+Python3 CIToolkit.py
 
-### Cybersecurity Utilities (`sqli`, `vulscan`, `hash type`, and more)
+Upon launching, the script will prompt you for an access key. Once authenticated, you'll gain access to the main menu, offering a plethora of options tailored to your objectives.
 
-Unleash a barrage of cybersecurity capabilities. Detect SQL injections, scan for vulnerabilities, and identify the cryptographic sigils of hashes.
+## Embrace the Power
+Unleash the potential of CIToolkit.py and conquer new frontiers with unparalleled finesse! 🚀
+Available Commands
 
-### Data Analysis Tools (`analyze_dataset`, `generate_report`, `visualize_data`, and more)
+The script provides a wide range of commands and modules:
 
-Master the arcane arts of data manipulation. Dissect datasets, compile knowledge into illuminating reports, and conjure visualizations to reveal hidden truths.
+    apf: Admin Panel Finder module for discovering admin control panels.
+    terminal: Launch a terminal emulator.
+    commands, help, Commands, COMMANDS, What can i do?, what can i do?: Display a list of available commands.
+    panel: Open the Control Panel for the tool.
+    sys: Display system information using the lsb_release command.
+    sqli: SQL Injection module. Installs required dependencies and launches the SQL Injector.
+    vulscan: Vulnerability Scanner. Installs Python2 and launches the Vulnerability Scanner.
+    itor: Install Tor and proxychains.
+    stor: Start the Tor service.
+    tors: Check the status of the Tor service.
+    dvpn: Download and install BitMask VPN.
+    shells: List obfuscated and deobfuscated shell directories.
+    phptools: Launch PHP tools.
+    backdoorssh: Launch a deploy script for specific backdoors.
+    discover: Clone and launch the Discover tool.
+    dinfo: Launch a script for domain WHOIS information.
+    hash type, hashtype, tipo de hash: Launch Hash Identify Script.
+    numconverter: Launch a Number Converter Script.
+    hexconv, hex converter, hex conv, convertidor de hex: Launch Hex Converter Script.
+    update: Update the system and install required Python packages.
+    converters: Open a web page for binary conversion.
+    aconv: Launch an ASCII Converter website.
+    osint: Launch the OSCARF OSINT Script.
+    steghide: Launch the Steghide GUI tool.
+    ddos: Launch the DDOS script.
+    tsqli: Launch the TSQLI script.
+    encdns: Launch DNS Encryption Installation.
+    stegattack: Launch Steghide Attacker script.
+    clear: Clear the terminal screen.
+    home: Return to the main menu.
+    uihanalysis: Launch the UIH Analysis Script.
+    exit, quit, q: Exit the tool.
+    toolbox: Launch the Toolbox with additional modules.
+    spoof my mac: Launch Mac Spoofing Script.
+    exif: Launch Image Metadata Extractor and Remover.
+    localports: Launch a Local Port Scan.
+    portscan: Launch a Network Port Scan.
+    sqlscan: Launch a SQL Injection Scanner.
+    anonsearch: Launch an Anonymous Web Search.
+    noobpasswd: Launch a Noob Password Cracker.
+    wle: Launch Wikileaks Email Downloader.
+    vpn: Launch a VPN (BITMASK).
+    toxicdork: Launch the Toxic Crawler Dorker.
+    t-cipher: Launch the T-Cipher Module.
+    firewall: Launch the Firewall Module.
 
-### Project Management Features (`panel`)
-
-Command the Control Panel to manage your covert operations. Track tasks, assemble intelligence, and deploy your forces effectively.
-
-### System Information (`sys`)
-
-Delve into the depths of system intelligence using the `lsb_release -a` command.
-
-### Misc Options (`itor`, `stor`, `tors`, `dvpn`, `shells`, `phptools`, and more)
-
-Expand your repertoire with diverse functionalities. Empower Tor, summon shells, wield PHP tools, and embrace a versatile arsenal.
-
-### Local and Network Port Scanning (`localports`, `portscan`)
-
-Unleash the power to scan both local and network ports. Survey your targets, undetected.
-
-### OSINT (`osint`)
-
-Embrace the power of Open-Source Intelligence (OSINT) with the OSCARF OSINT script.
-
-### Image Metadata Extraction and Removal (`exif`)
-
-Unveil hidden truths within images using the `exifpwn.py` script. Extract and cleanse metadata like a true enigma.
-
-### Local MAC Address Spoofing (`spoof my mac`)
-
-Disappear into the shadows by impersonating your device's MAC address using the `macspoof.py` script.
-
-### Easter Eggs (`wle`, `vpn`)
-
-Stumble upon hidden gems in the script, unveiling mysteries and delights.
-
-Embrace the might of CIToolkit.py and conquer new frontiers with unparalleled finesse! 🚀
+Please refer to the script itself for detailed descriptions of each command

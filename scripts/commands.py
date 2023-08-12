@@ -55,20 +55,20 @@ Toolkit ::Commands:
 ******************
 Security Options:
 ******************
-1. (spoof my mac) (MAC ADDRESS SPOOF WIFI/ETH) (WORKING)
-2. (itor) install Tor  (WORKING)
-3. (stor) Start Tor  (WORKING)
-4. (tors) Check Tor Status (WORKING)
-6. (vpn) G.U.I VPN Launcher(WORKING) 
-7. (encdns) Encrypt DNS (WORKING)
-8. (anonsearch) Anonymous TOR routed web search(WORKING - NEEDS ATTENTION)
-9. (shells) .PHP Coded Shells/Back-Doors (WORKING - NEEDS ATTENTION)
-10.(phptools) PHP deobfuscators, Testers, beautifiers etc. (WORKING)
+(firewall) Firewall Tool is designed to provide network administrators with an insight into the network traffic on a given interface.
+(spoof my mac) (MAC ADDRESS SPOOF WIFI/ETH) (WORKING)
+(itor) install Tor  (WORKING)
+(stor) Start Tor  (WORKING)
+(tors) Check Tor Status (WORKING)
+(vpn) G.U.I VPN Launcher(WORKING) 
+(encdns) Encrypt DNS (WORKING)
+(anonsearch) Anonymous TOR routed web search(WORKING - NEEDS ATTENTION)
+(shells) .PHP Coded Shells/Back-Doors (WORKING - NEEDS ATTENTION)
+(phptools) PHP deobfuscators, Testers, beautifiers etc. (WORKING)
 
 (quit) - (home) - (clear) - (update) - (terminal)
 
-~~~2022 EDITION~~~  
-"""]              
+"""]
 
 from time import sleep
 import sys
