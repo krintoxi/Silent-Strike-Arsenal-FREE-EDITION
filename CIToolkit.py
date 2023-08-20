@@ -394,10 +394,7 @@ def loopfunc():
         cmd1 = os.system ("bitmask")
     #Testing Toxic Crawler
     if choice == "toxicdork":
-        print("The Toolkit Script requires Tor and Python2.")
-        print("Please follow the on screen install.")
-        cmd1 = os.system ("sudo apt-get install python2")
-        cmd1 = os.system ("python2 scripts/Tox1cDorkeR.py")
+        cmd1 = os.system ("python3 scripts/Tox1cDorkeR.py")
     #T-Cipher Module For C.I Toolkit
     if choice == "t-cipher":
         cmd1 = os.system("python3 scripts/TCipher/T-Cipher.py")
