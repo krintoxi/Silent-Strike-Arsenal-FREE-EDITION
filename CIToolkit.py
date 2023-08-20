@@ -94,12 +94,11 @@ def loopfunc():
         print("*************************")
         print(" SQL Injector Module....")
         print("*************************")
-        print("The Toolkit Script requires Tor and Python2.")
+        print("The Toolkit Script requires Tor.")
         print("Please follow the on screen install.")
-        cmd1 = os.system ("sudo apt-get install python2")
         cmd1 = os.system ("sudo apt-get install tor")
         cmd1 = os.system ("sudo service tor start")
-        cmd1 = os.system ("sudo python2 scripts/sqli.pyc")
+        cmd1 = os.system ("python3 scripts/sqli.py")
 #----------------------End of SQL injection module call----------------------------------
 
     if choice == "vulscan":

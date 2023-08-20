@@ -39,8 +39,6 @@ def logo():
 ***************************
   NoobSecToolkit TOOLBOX
 *************************** 
-                                                                        
-
 """
 def menu():
     print ("""
