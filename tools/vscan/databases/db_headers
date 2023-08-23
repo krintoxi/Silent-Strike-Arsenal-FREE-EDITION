@@ -7,7 +7,7 @@
 # Chris Sullo (csullo@gmail.com)
 #
 # Note:
-# By submitting updates to this file you are transfering any and all copyright
+# By submitting updates to this file you are transferring any and all copyright
 # interest in the data to Chris Sullo so it can modified, incorporated into this product
 # relicensed or reused.
 #######################################################################
@@ -33,6 +33,7 @@
 "alternates"
 "authorization"
 "cache-control"
+"cf-request-id"
 "commerce-server-software"
 "connection"
 "content-encoding"
@@ -51,6 +52,7 @@
 "expect"
 "expect-ct"
 "expires"
+"feature-policy"
 "from"
 "host"
 "if-match"
@@ -63,9 +65,11 @@
 "location"
 "max-forwards"
 "mime-version"
+"nel"
 "nncoection"
 "p3p"
 "persistent-auth"
+"permissions-policy"
 "pragma"
 "proxy-authenticate"
 "proxy-authorization"
@@ -74,6 +78,7 @@
 "range"
 "referer"
 "referrer-policy"
+"report-to"
 "retry-after"
 "server"
 "set-cookie"
@@ -100,6 +105,7 @@
 "x-frame-options"
 "x-id"
 "xmlns"
+"x-dns-prefetch-control"
 "x-mod-pagespeed"
 "x-pad"
 "x-page-speed"
@@ -114,3 +120,5 @@
 "timing-allow-origin"
 "cf-cache-status"
 "cf-ray"
+"x-cdn"
+"link"

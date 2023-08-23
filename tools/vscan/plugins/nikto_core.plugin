@@ -49,6 +49,11 @@ sub change_variables {
         }
     }
 
+#            if ($line =~ /CGIDIRS/) {
+#                print "changed CGI Dirs\n";
+#                for ($i=0;$i<=$#subtests;$i++) { print "\t$i\t$subtests[$i]\n"; }
+#		 exit;
+# 		}
     return @subtests;
 }
 
@@ -103,6 +108,41 @@ sub is_404 {
 }
 
 ###############################################################################
+sub scrub {
+	my (@s, $line);
+	($line, $s[0], $s[1], $s[2], $s[3], $s[4]) = @_;
+
+	foreach my $i (@_) {
+		next if $i eq "";
+		if (is_ip($i)) {
+			$line =~ s/$i/0\.\0\.\0\.0/g;
+		}
+		else {
+			$line =~ s/$i/example.com/ig;
+		}
+	}
+
+        # name
+# print "hostname: " . $mark->{'hostname'} ."\n";
+        $line =~ s/$mark->{'hostname'}/example.com/ig unless $mark->{'hostname'} eq '';
+
+        # ip
+        $line =~ s/$mark->{'ip'}/0.0.0.0/ig unless $mark->{'ip'} eq '';
+#print "ip: " . $mark->{'ip'} ."\n";
+
+        # vhost
+        $line =~ s/$CLI{'vhost'}/example.com/ig unless $CLI{'vhost'} eq '';
+#print "vhost: " . $mark->{'vhost'} ."\n";
+
+        # and in case we got here from set_target
+        $line =~ s/$mark->{'ident'}/example.com/ig unless $mark->{'ident'} eq '';
+#print "ident: " . $mark->{'ident'} ."\n";
+
+#print "line2: $line\n";
+	return $line;
+
+}
+###############################################################################
 sub nprint {
     my $line   = shift;
     my $mode   = shift;
@@ -111,24 +151,25 @@ sub nprint {
 
     # scrub values
     if ($OUTPUT{'scrub'}) {
+	$line = scrub($line, $mark->{'hostname'}, $mark->{'ip'}, $CLI{'vhost'}, $mark->{'ident'});
 
         # name
-        $line =~ s/$mark->{'hostname'}/example.com/ig unless $mark->{'hostname'} eq '';
+        #$line =~ s/$mark->{'hostname'}/example.com/ig unless $mark->{'hostname'} eq '';
 
         # ip
-        $line =~ s/$mark->{'ip'}/0.0.0.0/ig unless $mark->{'ip'} eq '';
+        #$line =~ s/$mark->{'ip'}/0.0.0.0/ig unless $mark->{'ip'} eq '';
 
         # vhost
-        $line =~ s/$CLI{'vhost'}/example.com/ig unless $CLI{'vhost'} eq '';
+        #$line =~ s/$CLI{'vhost'}/example.com/ig unless $CLI{'vhost'} eq '';
 
         # and in case we got here from set_target
-        $line =~ s/$mark->{'ident'}/example.com/ig unless $mark->{'ident'} eq '';
+        #$line =~ s/$mark->{'ident'}/example.com/ig unless $mark->{'ident'} eq '';
     }
 
     # don't print debug & verbose to output file...
     if ($mode ne '') {
         if ($mode eq "d" && $OUTPUT{'debug'}) {
-            print "D:" . localtime() . " $line\n";
+            print STDERR "D:" . localtime() . " $line\n";
         }
         if ($mode eq "v" && $OUTPUT{'verbose'}) {
             print "V:" . localtime() . " $line\n";
@@ -269,7 +310,7 @@ sub map_codes {
         $FoF{'okay'}{'match'} = LW2::md4($cooked);
     }
 
-    # these are some used in mutate that may not be in the db_tests
+    # these are some used that may not be in the db_tests
     if (defined $CLI{'mutate'}) {
         $db_extensions{'bak'}  = 1;
         $db_extensions{'data'} = 1;
@@ -277,6 +318,14 @@ sub map_codes {
         $db_extensions{'dbf'}  = 1;
         $db_extensions{'lst'}  = 1;
         $db_extensions{'htx'}  = 1;
+        $db_extensions{'htm'}  = 1;
+        $db_extensions{'html'}  = 1;
+        $db_extensions{'ini'}  = 1;
+        $db_extensions{'lst'}  = 1;
+        $db_extensions{'txt'}  = 1;
+        $db_extensions{'xml'}  = 1;
+        $db_extensions{'php'}  = 1;
+        $db_extensions{'php3'}  = 1;
     }
 
     foreach my $ext (keys %db_extensions) {
@@ -466,7 +515,7 @@ sub dump_target_info {
 
 	if (defined $mark->{'messages'}) {
 		my @msgs = @{ $mark->{'messages'} };
-		foreach my $m (@msgs) { 
+		foreach my $m (@msgs) {
         		nprint("+ Message:            $m");
 		}
 	}
@@ -563,9 +612,9 @@ sub general_config {
                ) or usage();
 
     # both -host and -url
-    if (($CLI{'host'} ne '') && ($CLI{'url'} ne '')) { 
+    if (($CLI{'host'} ne '') && ($CLI{'url'} ne '')) {
         nprint("+ ERROR: Cannot use -url and -host at the same time");
-        exit;
+        exit 1;
 	}
 
     # 404string
@@ -579,7 +628,7 @@ sub general_config {
         foreach my $code (split(/\s?,\s?/, $CLI{'404code'})) {
             if ($code =~ /[^\d]/) {
                  nprint("+ ERROR: Invalid 404code, must be an integer");
-                 exit;
+                 exit 1;
                  }
             $VARIABLES->{'ERRCODES'}->{$code} = 1;
         }
@@ -590,7 +639,7 @@ sub general_config {
         $CLI{'maxtime'} = time_to_seconds($CLI{'maxtime'});
         if ($CLI{'maxtime'} eq '') {
             nprint("+ ERROR: Invalid maxtime value, must be a valid time (e.g., 3600s, 60m, 1h)");
-            exit;
+            exit 1;
         }
     }
 
@@ -606,7 +655,7 @@ sub general_config {
                 nprint(
                     "+ ERROR: Invalid until value, must be a valid time (e.g., 3600s, 60m, 1h) or a time (e.g., 03:00)"
                     );
-                exit;
+                exit 1;
             }
 
             # convert to a pausetime
@@ -636,7 +685,7 @@ sub general_config {
 
         if ($now > $pausetime) {
             nprint("+ ERROR: Pause time is in the past.");
-            exit;
+            exit 1;
         }
         $CLI{'until'} = $pausetime;
     }
@@ -684,12 +733,12 @@ sub general_config {
     if (defined($CLI{'saveresults'})) {
         if ($CLI{'saveresults'} eq '') {
             nprint("+ ERROR: -Save must have a directory name or '.' for auto-generated");
-            exit;
+            exit 1;
         }
         eval "require JSON::PP";
         if ($@) {
             nprint("+ ERROR: Module JSON::PP missing.");
-            exit;
+            exit 1;
         }
     }
 
@@ -699,14 +748,14 @@ sub general_config {
         $CLI{'ports'} =~ s/\s+$//;
         if ($CLI{'ports'} =~ /[^0-9\-\, ]/) {
             nprint("+ ERROR: Invalid port option '$CLI{'ports'}'");
-            exit;
+            exit 1;
         }
     }
 
     # auto-generate file name
     if (($CLI{'file'} eq '.') && ($CLI{'format'} eq '')) {
             nprint("+ ERROR: Output format must be used with auto file naming");
-            exit;
+            exit 1;
         }
 
     if ($CLI{'file'} eq '.') {
@@ -757,23 +806,23 @@ sub general_config {
 
     if ($CLI{'format'} !~ /^(?:txt|htm|csv|json|sql|nbe|xml|none)$/) {
         nprint("+ ERROR: Invalid output format");
-        exit;
+        exit 1;
 	}
 
     if ((defined $CLI{'file'}) && ($CLI{'format'} eq "")) {
         nprint("+ERROR: Output file specified without a format");
-        exit;
+        exit 1;
     }
 
     if ((!defined $CLI{'file'}) && ($CLI{'format'} ne "none")) {
         nprint("+ERROR: Output file format specified without a name");
-        exit;
+        exit 1;
     }
 
     # verify readable dtd
-    if ($CLI{'format'} eq 'xml' && !-r $CONFIGFILE{'NIKTODTD'}) {
-        nprint("+ ERROR: reading DTD");
-        exit;
+    if ($CLI{'format'} eq 'xml' && $CONFIGFILE{'NIKTODTD'} != "") {
+        nprint("+ ERROR: DTD not defined");
+        exit 1;
     }
 
     # screen output
@@ -801,15 +850,12 @@ sub general_config {
             nprint(
                 "+ ERROR: \'$CLI{'hostauth'}\' (-i option) syntax is 'user:password' or 'user:password:domain' for host authentication."
                 );
-            exit;
+            exit 1;
         }
     }
 
     if (defined $CLI{'evasion'}) {
         $CLI{'evasion'} =~ s/[^1-8AB]//g;
-    }
-    else {
-        undef $NIKTO{'anti_ids'};    # we don't need this any more
     }
 
     if (!defined $CLI{'plugins'} || $CLI{'plugins'} eq "") {
@@ -1045,7 +1091,7 @@ sub resolve {
     {
         if ($CLI{'skiplookup'}) {
             print("+ ERROR: -nolookup set, but given name\n");
-            exit;
+            exit 1;
         }
 
     if ($hent = gethostbyname($ident)) {
@@ -1055,7 +1101,7 @@ sub resolve {
     }
 
     $ip = $addresses[0];
-    if ($addresses[1] != "") { 
+    if ($addresses[1] != "") {
 	$ipcache = "Multiple IP addresses found: $ip, ";
 	for (my $i=1; $i<=$#addresses; $i++) {
 		$ipcache .= "$addresses[$i], ";
@@ -1065,7 +1111,7 @@ sub resolve {
 
    if ($ip !~ /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/) {
        nprint("+ ERROR: Invalid IP: $ip\n\n");
-       exit;
+       exit 1;
    }
        $name = $ident;
      }
@@ -1142,9 +1188,9 @@ sub set_targets {
         # is it a URL?
         if ($host =~ /^https?:\/\//) {
 
-            if ($CLI{'ports'} ne '') { 
+            if ($CLI{'ports'} ne '') {
 		nprint("- ERROR: The -port option cannot be used with a full URI");
-		exit;
+		exit 1;
 		}
             my @hostdata = LW2::uri_split($host);
 
@@ -1212,7 +1258,7 @@ sub load_databases {
     for my $file (@dbs) {
         if (!-r "$CONFIGFILE{'DBDIR'}/$file") {
             nprint("+ ERROR: Can't find/read required file \"$CONFIGFILE{'DBDIR'}/$file\"");
-            exit;
+            exit 1;
         }
     }
 
@@ -1403,7 +1449,7 @@ sub check_dbs {
                 $line =~ s/^\s+//;
                 if ($line =~ /^\#|^$/) { next; }
                 my @L = parse_csv($line);
-                if (   ($L[4] !~ /(GET|POST|TRACE|TRACK|OPTIONS|SEARCH|INDEX)/i)
+                if (($L[4] !~ /(GET|POST|TRACE|TRACK|OPTIONS|SEARCH|INDEX)/i)
                     && ($L[0] ne '006433')) {
                     nprint("\t+ ERROR: Possibly invalid method: $L[4] on ($line)");
                 }
@@ -1419,7 +1465,7 @@ sub check_dbs {
                 if (($L[3] =~ /^\@CG/) && ($L[3] !~ /^\@CGIDIRS/)) {
                     nprint("\t+ ERROR: Possible \@CGIDIRS misspelling: $line");
                 }
-                if (($L[1] =~ /[^0-9]/) || ($L[1] eq "")) { nprint("\t+ ERROR: Invalid OSVDB ID: $line"); }
+
                 $ENTRIES{"$L[3],$L[4],$L[5],$L[6],$L[7],$L[8],$L[9],$L[11],$L[12]"}++;
                 if ((count_fields($line, 1) ne 12) && (count_fields($line) ne '')) {
                     nprint("\t+ ERROR: Invalid syntax: $line");
@@ -1434,7 +1480,7 @@ sub check_dbs {
                 else {
                     $ALL_IDS{$L[0]}=1;
                 }
-                if ($L[2] =~ /[^a-f0-9]/) {
+                if ($L[2] eq "" || $L[2] =~ /[^a-f0-9]/) {
                     nprint("\t+ ERROR: Invalid Tuning Type: $line");
                 }
                 if ($L[3] =~ '^(/@|//)' && $L[0] !~ /(000396|000447|000543|000544|000545|000928|000929|001208|001373|001497|002761|002762|003029|007152)/i) {
@@ -1620,7 +1666,7 @@ sub check_dbs {
     nprint("\nSome (probably) open IDs: " . join(", ",@open) );
 
     nprint("\n");
-    exit;
+    exit 1;
 }
 
 ###############################################################################
@@ -1696,7 +1742,7 @@ sub port_check {
         }
     }
 
-    add_vulnerability($m,"No web server found on " . ($hostname || $ip) . ":$port", '000029', '', '', '/', $request, $response, "No HTTP response");
+    add_vulnerability($m,"No web server found on " . ($hostname || $ip) . ":$port", '000029', '0', '', '/', $request, $response, "No HTTP response");
     nprint("---------------------------------------------------------------------------");
 
     return 0;
@@ -2052,7 +2098,7 @@ sub check_updates {
 
     if ($code ne 200) {
         nprint("+ ERROR ($code): Unable to get $mark{'hostname'}$serverdir/versions.txt");
-        exit;
+        exit 1;
     }
 
     # make hash
@@ -2101,7 +2147,7 @@ sub check_updates {
                 nprint
                   "+ No update has taken place. Please upgrade Nikto by visiting http://$server/\n";
                 if ($remotemsg ne "") { nprint("+ $server message: $remotemsg"); }
-                exit;
+                exit 1;
             }
             push(@DBTOGET, $remotefile);
             if ($remotefile !~ /^db_/) { $code_updates = 1; }
@@ -2114,7 +2160,7 @@ sub check_updates {
         my ($code, $content) = nfetch(\%mark, "$serverdir/$toget", "GET");
         if ($code ne 200) {
             nprint("+ ERROR: Unable to get $server$serverdir/$toget");
-            exit;
+            exit 1;
         }
         if ($content ne "") {
             my $dir = '';
@@ -2144,7 +2190,7 @@ sub check_updates {
 
     if ($#DBTOGET < 0) { nprint("+ No updates required."); }
     if ($remotemsg ne "") { nprint("+ $server message: $remotemsg"); }
-    exit;
+    exit 1;
 }
 
 ###############################################################################
@@ -2256,7 +2302,7 @@ sub proxy_check {
                 nprint(
                     "+ Proxy server uses '$x[0]' rather than 'Basic' authentication. $VARIABLES{'name'} $VARIABLES{'version'} can't do that."
                     );
-                exit;
+                exit 1;
             }
 
             # test it...
@@ -2277,7 +2323,7 @@ sub proxy_check {
                 nprint(
                     "+ Proxy requires authentication for '$pauthinfo[0]' realm '$pauthinfo2[1]', unable to authenticate."
                     );
-                exit;
+                exit 1;
             }
             else { nprint("- Successfully authenticated to proxy.", "v"); }
         }
@@ -2295,8 +2341,12 @@ sub dump_var {
     my $display = LW2::dump('', \%hash_in);
     $display =~ s/^\$/'$msg'/;
     if ($OUTPUT{'scrub'}) {
-        $display =~ s/'host' => '.*',/'host' => 'example.com',/g;
-        $display =~ s/'Host' => '.*'/'host' => 'example.com'/g;
+	$new = "";
+	foreach my $line (split(/\n/, $display)) {
+        	$line = scrub($line);
+		$new .= "$line\n";
+	}
+	$display = $new;
     }
     nprint($display, "d");
     return;
@@ -2502,9 +2552,7 @@ sub nfetch {
                 && ($mark->{'banner'} ne $result{'server'})
 		&& ($result{'server'} ne 'Microsoft-HTTPAPI/2.0')
 		) {
-                nprint(
-                    "+ Server banner has changed from '$mark->{banner}' to '$result{server}' which may suggest a WAF, load balancer or proxy is in place"
-                    );
+		add_vulnerability($mark, "Server banner changed from '$mark->{banner}' to '$result{server}'", 999962, 0, $method, $uri, $request, $response);
                 $mark->{'bannerchanged'} = 1;
             }
         }
@@ -2634,7 +2682,7 @@ sub set_scan_items {
     nprint("- $COUNTERS{'total_checks'} server checks loaded", "v");
     if ($COUNTERS{'total_checks'} eq 0 && !defined $CLI{'tuning'}) {
         nprint("+ Unable to load valid checks!");
-        exit;
+        exit 1;
     }
     return;
 }
@@ -2649,7 +2697,7 @@ sub max_test_id {
 sub get_ips {
     my $string = $_[0] || return;
     my @ips;
-    while ($string =~ /(?:\b|[^0-9])([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)(?:\b|[^0-9])/g) {
+    while ($string =~ /(?:\b|[^0-9v])([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(?:\b|[^0-9])/g) {
         push(@ips, $1);
     }
     return @ips;
@@ -2796,7 +2844,7 @@ sub send_updates {
     if ($answer !~ /y/i) { return; }
 
     # set up our mark
-    my %mark = ('ident' => 'cirt.net',
+    my %mark = ('ident' => '68.183.58.226',
                 'ssl'   => 1,
                 'port'  => 443
                 );
@@ -2808,7 +2856,7 @@ sub send_updates {
         }
     }
 
-    ($mark{'hostname'}, $mark{'ip'}, $mark{'display_name'}) = resolve('cirt.net');
+    ($mark{'hostname'}, $mark{'ip'}, $mark{'display_name'}) = resolve('68.183.58.226');
 
     $upd_enc = LW2::encode_base64($updated_version);
     chomp($upd_enc);
@@ -2843,7 +2891,8 @@ sub send_updates {
 
 #######################################################################
 sub usage {
-    if ($_[0] eq "Help") {
+    my $is_failure = shift;
+
         print "
    Options:
        -ask+               Whether to ask about submitting updates
@@ -2869,7 +2918,7 @@ sub usage {
             print "                               $k     $NIKTO{'anti_ids'}{$k}\n";
         }
 
-        print "        -Format+           Save file (-o) format:
+        print "       -Format+           Save file (-o) format:
                                csv   Comma-separated-value
                                json  JSON Format
                                htm   HTML Format
@@ -2878,7 +2927,7 @@ sub usage {
                                txt   Plain text
                                xml   XML Format
                                (if not specified the format will be taken from the file extension passed to -output)
-       -Help              Extended help information
+       -Help              This help information
        -host+             Target host/URL
        -404code           Ignore these HTTP codes as negative responses (always). Format is \"302,301\".
        -404string         Ignore this string in response body content as negative response (always). Can be a regular expression.
@@ -2899,7 +2948,7 @@ sub usage {
        -no404             Disables nikto attempting to guess a 404 page
        -Option            Over-ride an option in nikto.conf, can be issued multiple times
        -output+           Write output to this file ('.' for auto-name)
-       -Pause+            Pause between tests (seconds, integer or float)
+       -Pause+            Pause between tests (seconds)
        -Plugins+          List of plugins to run (default: ALL)
        -port+             Port to use (default 80)
        -RSAcert+          Client certificate file
@@ -2935,37 +2984,10 @@ sub usage {
        -Version           Print plugin and database versions
        -vhost+            Virtual host (for Host header)
    		+ requires a value\n\n";
-    }
-    else {
-        print "
-       -config+            Use this config file
-       -Display+           Turn on/off display outputs
-       -dbcheck            check database and other key files for syntax errors
-       -Format+            save file (-o) format
-       -Help               Extended help information
-       -host+              target host/URL
-       -id+                Host authentication to use, format is id:pass or id:pass:realm
-       -list-plugins       List all available plugins
-       -output+            Write output to this file
-       -nossl              Disables using SSL
-       -no404              Disables 404 checks
-       -Plugins+           List of plugins to run (default: ALL)
-       -port+              Port to use (default 80)
-       -root+              Prepend root value to all requests, format is /directory
-       -ssl                Force ssl mode on port
-       -Tuning+            Scan tuning
-       -timeout+           Timeout for requests (default 10 seconds)
-       -update             Update databases and plugins from CIRT.net
-       -Version            Print plugin and database versions
-       -vhost+             Virtual host (for Host header)
-   		+ requires a value
-
-	Note: This is the short help output. Use -H for full help text.\n\n";
-    }
 
     check_modules();
 
-    exit;
+    exit $is_failure;
 }
 
 #######################################################################

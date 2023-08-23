@@ -51,27 +51,21 @@ sub nikto_headers_postfetch {
     my ($mark, $parameters, $request, $result) = @_;
 
     # Check for known headers
-    my @interesting_headers =
-      qw /commerce-server-software daap-server dasl datacenter dav generator hosted-by hosted-with microsoftofficewebserver microsoftsharepointteamservices ms-author-via powered-by server-name serverid servlet-engine via x-aspnet-version x-blackboard-product x-cocoon-version x-compressed-by x-dmuser x-gallery-version x-hosted-at x-hostname x-isp x-powered-by x-responding-server x-served-by x-server x-server-name x-webserver x-owa-version access-control-allow-origin x-application-context cneonction nncoection/;
-
-    foreach my $header (@interesting_headers) {
-        nikto_headers_check($mark, $result, $header, 'Retrieved ' . $header . ' header:',
-                            999986, $request);
-    }
+    nikto_headers_check($mark, $result, $header, 999986, $request);
 
     # look for internal IPs
     foreach my $header (keys %$result) {
 
         # skip some very unlikely headers
-        if    ($header eq 'whisker')         { next; }
+        if (defined $HFOUND{$header}) { next; }
+        elsif    ($header eq 'whisker')         { next; }
         elsif ($header eq 'date')            { next; }
         elsif ($header eq 'content-type')    { next; }
         elsif ($header eq 'content-length')  { next; }
         elsif ($header eq 'connection')      { next; }
         elsif ($header eq 'x-mod-pagespeed') { next; }
         elsif ($header eq 'x-page-speed')    { next; }
-        elsif (defined $HFOUND{$header}) { next; }
-	
+
 	next if $header eq 'server' && substr($result->{$header}, 0, 8) eq 'WebSEAL/';
 	next if $header eq 'x-powered-by' && $result->{$header} =~ /Oracle GlassFish Server [0-9]/;
 
@@ -84,7 +78,7 @@ sub nikto_headers_postfetch {
                     my $msg;
                     if ($internal) { $msg .= "RFC-1918 "; }
                     $msg .= "IP address found in the '$header' header. The IP is \"$ip\".";
-                    add_vulnerability($mark, $msg, 999979, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result); 
+                    add_vulnerability($mark, $msg, 999979, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
                     $HFOUND{$header} = 1;
                 }
             }
@@ -111,13 +105,13 @@ sub nikto_headers_postfetch {
             }
             use bignum;
             my ($inode, $size, $mtime, $ltime);
-            if ($ishex) { 
+            if ($ishex) {
             	$inode = "0x$fields[0]";
             	$size  = "0x$fields[1]";
             	$mtime = "0x$fields[2]";
             	$ltime = substr(sprintf("%s", hex($mtime)), 0, 10);
 		}
-            else { 
+            else {
             	$inode = $fields[0];
             	$size  = $fields[1];
             	$mtime = $ltime = $fields[2];
@@ -143,7 +137,7 @@ sub nikto_headers_postfetch {
                     "X-Frame-Options header is set to allow framing from $allowed. This does not have full cross-browser support (only in IE and Firefox) and may lead to the header being ignored.",
                     999978, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
             }
-		}			
+		}
 		else {
 			add_vulnerability($mark, "The anti-clickjacking X-Frame-Options header is not present.",
 							  999957, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
@@ -151,27 +145,19 @@ sub nikto_headers_postfetch {
 		$XFRAME{ $mark->{hostname} }{ $mark->{port} } = 1;
     }
 
-    # X-XSS-Protection
-    if (!$XSSPROTECTION{ $mark->{hostname} }{ $mark->{port} } && defined $result->{'whisker'}->{'code'}) {
-        if (defined $result->{'x-xss-protection'}) {
-
-            # Parse this and see whether it's set to 0
-            if ($result->{'x-xss-protection'} =~ /^0/) {
-                add_vulnerability( $mark, "X-XSS-Protection header has been set to disable XSS Protection. There is unlikely to be a good reason for this.",
-                    999101, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
-                $XSSPROTECTION{ $mark->{hostname} }{ $mark->{port} } = 1;
+    # Incapsula WAF
+    if (defined $result->{'x-cdn'} && ($result->{'x-cdn'} == "Incapsula")) {
+            add_vulnerability( $mark, "Incapsula WAF is in use.",
+                    999976, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
+            $HFOUND{$header} = 1;
             }
-        }
-    }
 
-    # And for if it's not defined
-    if (!$HEADERS_XXP{ $mark->{hostname} }{ $mark->{port} } && defined $result->{'whisker'}->{'code'}) {
-        if (!defined $result->{'x-xss-protection'}) {
-            add_vulnerability( $mark, "The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS",
-                999102, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
-        }
-        $HEADERS_XXP{ $mark->{hostname} }{ $mark->{port} } = 1;
-    }
+    # NetIQ
+    if (defined $result->{'x-mag'}) {
+            add_vulnerability( $mark, "NetIQ debug information is enabled. See https://www.netiq.com/documentation/netiqaccessmanager32/accessgatewayhelp/data/agsglobaladv.html.",
+                    999946, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
+            $HFOUND{$header} = 1;
+            }
 
     # Look for any uncommon headers
 
@@ -205,34 +191,19 @@ sub nikto_headers_postfetch {
         if (!defined $result->{'strict-transport-security'}) {
             add_vulnerability( $mark, "The site uses SSL and the Strict-Transport-Security HTTP header is not defined.", 999970, 0,
                   $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
-        } 
+        }
         elsif ($result->{'strict-transport-security'} =~ /max-age="?0"?/i) {
             add_vulnerability( $mark, "The site uses SSL and the Strict-Transport-Security HTTP header is set with max-age=0.", 999971, 0,
                   $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
           }
-       
+
        $HEADERS_STS{ $mark->{hostname} }{ $mark->{port} } = 1;
     }
 
-    # Look for Expect-CT
-    if($mark->{'ssl'} && !$EXPECTCT{ $mark->{hostname} }{$mark->{port} } && defined $result->{'whisker'}->{'code'}) {
-        if(defined $result->{'expect-ct'}) {
-            unless($result->{'expect-ct'} =~ /^enforce/) {
-                add_vulnerability( $mark, "Expect-CT is not enforced, upon receiving an invalid Certificate Transparency Log, the connection will not be dropped.",
-                    999954, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
-            }
-        }
-        else {
-            add_vulnerability($mark, "The site uses SSL and Expect-CT header is not present.",
-                999955, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
-        }
-        $EXPECTCT{ $mark->{hostname} }{ $mark->{port} } = 1;
-    }
-    
     if (!$HEADERS_XCTO{ $mark->{hostname} }{ $mark->{port} } && defined $result->{'whisker'}->{'code'}) {
         if (!defined $result->{'x-content-type-options'}) {
             add_vulnerability( $mark,
-                "The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type",
+                "The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type.",
                 999103, 0, $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
         }
         $HEADERS_XCTO{ $mark->{hostname} }{ $mark->{port} } = 1;
@@ -246,29 +217,46 @@ sub nikto_headers_postfetch {
         }
     }
 
+    # CSP report-to URI
+      if (!$HEADERS_XCO{ $mark->{hostname} }{ $mark->{port} } && defined $result->{'whisker'}->{'code'}) {
+        if (defined $result->{'report-to'}) {
+            add_vulnerability( $mark, "A report-to header was sent by the server, the URI is: $result->{'report-to'}", 000137, 0,
+                $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
+            $HEADERS_XCO{ $mark->{hostname} }{ $mark->{port} } = 1;
+        }
+    }
+
     return $request, $result;
 }
 
 sub nikto_headers_check {
     return if $mark->{'terminate'};
-    my ($mark, $result, $header, $message, $tid, $request) = @_;
+    my ($mark, $result, $header, $tid, $request) = @_;
+    my @interesting_headers =
+    qw /commerce-server-software daap-server dasl datacenter dav generator hosted-by hosted-with microsoftofficewebserver microsoftsharepointteamservices ms-author-via powered-by server-name serverid servlet-engine via x-aspnet-version x-blackboard-product x-cocoon-version x-compressed-by x-dmuser x-gallery-version x-hosted-at x-hostname x-isp x-powered-by x-responding-server x-served-by x-server x-server-name x-webserver x-owa-version access-control-allow-origin x-application-context cneonction nncoection xxx-real-ip bae-env-addr-sql-ip bae-env-addr-sql-port cf-connecting-ip fastly-client-ip incap-client-ip real-ip rlnclientipaddr true-client-ip x-clientip x-client-ip x-cluster-client-ip  x-ip x-nokia-ipaddress x-real-ip x-wap-network-client-ip reason-code/;
 
-    if (exists $result->{$header}) {
-        my $key =
-          LW2::md5(  $mark->{'ip'}
+    foreach my $header (@interesting_headers) {
+    	if (exists $result->{$header}) {
+        my $key = LW2::md5(  $mark->{'ip'}
                    . $mark->{'hostname'}
                    . $mark->{'port'}
                    . $mark->{'ssl'}
                    . $result->{'whisker'}->{'method'}
                    . $header);
 
-        if (!exists $HFOUND{$key}) {
-            my $value = $result->{$header};
+       	if (!exists $HFOUND{$key}) {
+            my $value = "";
+            if (ref($result->{$header}) eq ARRAY) {
+            	$value = join(', ', @{ $result->{$header} });
+              	}
+            else {
+              	$value = $result->{$header};
+              	}
             $HFOUND{$key} = $value;
-
-            add_vulnerability($mark, $message . " " . $value, $tid, "0", $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
-        }
+            add_vulnerability($mark, "Retrieved $header header: $value", $tid, "0", $request->{'whisker'}->{'method'}, $request->{'whisker'}->{'uri'}, $request, $result);
+       	}
     }
+  }
 }
 
 sub nikto_headers {
@@ -303,7 +291,7 @@ sub nikto_headers {
     $locheaders{'User-Agent'} =~ s/\@TESTID/headers:\ IIS\ internal\ IP/;
     $locflags{'noclean'} = 1;
     $locflags{'nohost'}  = 1;
-    $cl = $l = $wa = 0;
+    $cl = $l = $wa = $rt = 0;
 
     foreach my $uri ('/',                              '/images',
                      '/Autodiscover/Autodiscover.xml', '/Autodiscover/',
@@ -346,11 +334,29 @@ sub nikto_headers {
                 if (($ips[0] ne '') && ($ips[0] ne $mark->{'ip'})) {
                         $wa = 1;
                         add_vulnerability( $mark,
-                	"Microsoft Exchange Systems (CAS and OWA) may reveal the internal or real IP in the WWW-Authenticate header via a request to $uri over HTTP/1.0. The value is \"$ips[0]\".", 
+                	"Microsoft Exchange Systems (CAS and OWA) may reveal the internal or real IP in the WWW-Authenticate header via a request to $uri over HTTP/1.0. The value is \"$ips[0]\".",
                         999986, 630, "GET", $uri, $request, $result);
                         }
                 }
-        if ($cl && $l && $wa) { last; }
+
+        if (!$rt && ($result->{'report-to'} ne "")) {
+        	my @bits = split("url\": \"", $result->{'report-to'});
+		    my $have = 0;
+            my @urls;
+        	foreach my $b (@bits) {
+                	next if $b !~ /^http/;
+                	$b =~ s/\".*$//;
+        			if ($b ne "") {
+                        push(@urls, $b);
+			        	$have = $rt = 1;
+				        }
+        		    }
+		if ($have) {
+			add_vulnerability( $mark, "A report-to header was found with the following URLs: " . join(", ", @urls), 999945, 630, "GET", $uri, $request, $result);
+			}
+		}
+
+        if ($cl && $l && $wa && $rt) { last; }
         }
 
     #######################################################################

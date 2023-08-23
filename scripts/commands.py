@@ -51,6 +51,7 @@ Toolkit ::Commands:
 (localports) - Scans for open Local Network Ports(WORKING)
 (noobpasswd) - Key/Password cracking tools(NOT WORKING)
 (ddos) - DDOS script with W.A.F Detection (WORKING)
+(anavi) ATT&CK Navigator a web-based tool for annotating and exploring ATT&CK matrices
 
 ******************
 Security Options:

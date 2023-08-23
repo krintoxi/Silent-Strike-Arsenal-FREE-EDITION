@@ -44,7 +44,7 @@ sub html_head {
     print STDERR "+ ERROR: Output file not specified.\n" if $file eq '';
 
     # Write header for html file, return file handle
-    open(OUT, ">>$file") || die print STDERR "+ ERROR: Unable to open '$file' for write: $@\n";
+    open(OUT, ">$file") || die print STDERR "+ ERROR: Unable to open '$file' for write: $@\n";
 
     my $html = html_change_vars($TEMPLATES{'htm_start'});
     $html =~ s/\#NIKTODTD#/$CONFIGFILE{'NIKTODTD'}/;
@@ -147,10 +147,14 @@ sub html_change_vars {
     $variables{"#ID#"} = $item->{'nikto_id'};
 
     # OSVDB info
+    my $refs = "";
     my $OSVDB = $item->{'osvdb'};
     if ($OSVDB !~ /\d+/) { $OSVDB = 0; }
-    $variables{"#TEMPL_OSVDB_LINK#"} = "http://osvdb.org/$OSVDB";
-    $variables{"#TEMPL_OSVDB#"}      = $OSVDB;
+    if ($OSVDB != 0) {
+        $refs = "<a href='https://vulners.com/osvdb/OSVDB:" . $OSVDB ."'>OSVDB-" . $OSVDB . "</a>";
+        }
+
+    $variables{"#TEMPL_REFERENCES#"} = $refs;
 
     # Scanner Messages Handling
     $variables{"#TEMPL_SMMSG#"} = $item->{'message'};

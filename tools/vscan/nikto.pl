@@ -1,8 +1,38 @@
 #!/usr/bin/env perl
 use strict;
+#VERSION,2.1.6
 ###############################################################################
 # Modules are now loaded in a function so errors can be trapped and evaluated
 load_modules();
+###############################################################################
+#                               Nikto                                         #
+###############################################################################
+#  Copyright (C) 2001 Chris Sullo
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation; version 2
+#  of the License only.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to
+#  Free Software Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+# Contact Information:
+#     Sullo (sullo@cirt.net)
+#     http://cirt.net/
+#######################################################################
+# See the COPYING file for more information on the License Nikto is distributed under.
+#
+# This program is intended for use in an authorized manner only, and the author
+# can not be held liable for anything done with this program, code, or items discovered
+# with this program's use.
+#######################################################################
 
 # global var/definitions
 use vars qw/$TEMPLATES %CLI %VARIABLES %TESTS/;
@@ -13,8 +43,8 @@ use vars qw/@RESULTS @PLUGINS @DBFILE @REPORTS %CONTENTSEARCH/;
 Getopt::Long::Configure('no_ignore_case');
 $COUNTERS{'scan_start'}  = time();
 $VARIABLES{'DIV'}        = "-" x 75;
-$VARIABLES{'name'}       = "Toolkit Scanner";
-$VARIABLES{'version'}    = "1.6";
+$VARIABLES{'name'}       = "Nikto";
+$VARIABLES{'version'}    = "2.1.6";
 
 # signal trap so we can close down reports properly
 $SIG{'INT'} = \&safe_quit;
@@ -42,12 +72,14 @@ nprint($VARIABLES{'DIV'});
 
 # No targets - quit while we're ahead
 if ($CLI{'host'} eq '') {
-    nprint("+ ERROR: No host or URL specified");
-    usage();
+    nprint("+ ERROR: No host (-host) specified");
+    usage(1);
 }
 
 $COUNTERS{'total_targets'} = $COUNTERS{'hosts_completed'} = 0;
 load_plugins();
+
+my $is_failure = 0;
 
 # Parse the supplied list of targets
 my @MARKS = set_targets($CLI{'host'}, $CLI{'ports'}, $CLI{'ssl'}, $CLI{'root'});
@@ -69,7 +101,7 @@ foreach my $mark (@MARKS) {
     # Try to resolve the host
     my $msgs;
     ($mark->{'hostname'}, $mark->{'ip'}, $mark->{'display_name'}, $msgs) = resolve($mark->{'ident'});
-    if ($msgs ne "") { 
+    if ($msgs ne "") {
 	push(@{ $mark->{'messages'} }, $msgs);
 	#push ($mark->{'messages'}, $msgs);
     }
@@ -157,6 +189,11 @@ foreach my $mark (@MARKS) {
         run_hooks($mark, "recon");
         run_hooks($mark, "scan");
     }
+
+    if ($mark->{'total_errors'} > 0 || $mark->{'total_vulns'} > 0) {
+        $is_failure = 1;
+    }
+
     $mark->{'end_time'} = time();
     $mark->{'elapsed'}  = $mark->{'end_time'} - $mark->{'start_time'};
     if (!$CLI{'findonly'}) {
@@ -167,8 +204,9 @@ foreach my $mark (@MARKS) {
         }
         else {
             nprint(
-                "+ Scan terminated:  $mark->{'total_errors'} error(s) and $mark->{'total_vulns'} item(s) reported on remote host"
+                "+ SCAN TERMINATED:  $mark->{'total_errors'} error(s) and $mark->{'total_vulns'} item(s) reported on remote host"
                 );
+                $is_failure = 1;
         }
         nprint(  "+ End Time:           "
                . date_disp($mark->{'end_time'})
@@ -193,7 +231,7 @@ if (!$CLI{'findonly'}) {
 
 nprint("T:" . localtime() . ": Ending", "d");
 
-exit;
+exit $is_failure;
 
 #################################################################################
 # Load config files in order
@@ -248,18 +286,18 @@ sub load_modules {
 	my @modules = qw/Getopt::Long Time::Local IO::Socket Net::hostent/;
 	push(@modules,"List::Util qw(sum)");
 	push(@modules,"Cwd 'abs_path'");
-	foreach my $mod (@modules) { 
+	foreach my $mod (@modules) {
 		eval "use $mod";
-        	if ($@) { 
-			print "ERROR: Required module not found: $mod\n"; 
-			$errors=1; 
+        	if ($@) {
+			print "ERROR: Required module not found: $mod\n";
+			$errors=1;
 		}
 	}
 
 	@modules = ();
 	push(@modules,"Time::HiRes qw(sleep ualarm gettimeofday tv_interval)");
 	push(@modules,"POSIX qw(:termios_h)");
-	foreach my $mod (@modules) { 
+	foreach my $mod (@modules) {
 		eval "use $mod";
 		if ($@ && $^O !~ /MSWin32/) {
 			# Allow this to work on Windows
@@ -267,7 +305,7 @@ sub load_modules {
 		}
 	}
 
-	if ($errors) { exit; }
+	if ($errors) { exit 1; }
 }
 
 #################################################################################

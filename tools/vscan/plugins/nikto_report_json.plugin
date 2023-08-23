@@ -41,7 +41,7 @@ sub json_open {
     my ($file) = @_;
 
     # Open file and produce header
-    open(OUT, ">>$file") || die print STDERR "+ ERROR: Unable to open '$file' for write: $@\n";
+    open(OUT, ">$file") || die print STDERR "+ ERROR: Unable to open '$file' for write: $@\n";
 
     # Write header
 #    print OUT "\"$VARIABLES{'name'} - v$VARIABLES{'version'}/$VARIABLES{'core_version'}\"\n";
@@ -65,23 +65,30 @@ sub json_host_start {
 # end output
 sub json_host_end {
     my ($handle, $mark) = @_;
-    print $handle "],";
+    print $handle "]}";
     return;
-}                                                                
+}
 ###############################################################################
 # close output file
 sub json_close {
     my ($handle, $mark) = @_;
-    print $handle "}\n";
+    print $handle "\n";
     close($handle);
     return OUT;
 }
+
+my $json_item_count = 0;
 ###############################################################################
 # print an item
 sub json_item {
     my ($handle, $mark, $item) = @_;
     foreach my $uri (split(' ', $item->{'uri'})) {
-        my $line = '{';
+        my $line = '';
+        if ( $json_item_count ne 0 ) {
+            $line .= ",";
+        }
+        $json_item_count++;
+        $line .= "{";
 
         $line .= "\"id\": \"" .$item->{'nikto_id'} ."\",";
         if ($item->{'osvdb'} ne '') { $line .= "\"OSVDB\": \"" .$item->{'osvdb'} ."\","; }
@@ -91,7 +98,7 @@ sub json_item {
         if (($uri ne '') && ($mark->{'root'} ne '') && ($uri !~ /^$mark->{'root'}/))
 			{ $line .= "\"url\":\"" .$mark->{'root'} . $uri ."\","; }
 		else { $line .= "\"url\":\"" .$uri ."\","; }
-	
+
 		my $msg = $item->{'message'};
 		$uri=quotemeta($uri);
 		my $root = quotemeta($mark->{'root'});
@@ -99,10 +106,9 @@ sub json_item {
 		$msg =~ s/^$root$uri:\s//;
         $msg =~ s/"/\\"/g;
         $line .= "\"msg\":\"$msg\"";
-        $line .= "},";
+        $line .= "}";
         print $handle "$line";
     }
 }
 
 1;
-

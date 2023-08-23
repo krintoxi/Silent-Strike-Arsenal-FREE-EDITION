@@ -43,7 +43,7 @@ sub nikto_tests_init {
 sub nikto_tests {
     return if $mark->{'terminate'};
     my ($mark, $parameters) = @_;
-    my (@tids, $data);
+    my @tids;
 
     if (defined $parameters->{'tids'}) {
         @tids = expand_range($parameters->{'tids'});
@@ -59,14 +59,15 @@ sub nikto_tests {
         my @urilist = change_variables($TESTS{$checkid}{'uri'});
 
         # Now repeat for each uri
-        foreach my $uri (@urilist) {
+	URI: foreach my $uri (@urilist) {
             return if $mark->{'terminate'};
-            my %headrs;
-            my %flags;
+            my (%headrs, %flags, $data);
+
             if ($TESTS{$checkid}{'headers'} ne '') {
             	my $header = unslash($TESTS{$checkid}{'headers'});
                 foreach my $h (split /\r\n/, $header) {
                     my ($key, $value) = split(/: /, $h);
+                    lc($key);
                     $headrs{$key} = $value;
                 }
                 $headrs{'host'} = $mark->{'hostname'} unless ($headrs{'host'}); # Kludge not to override host injection vectors
@@ -81,7 +82,7 @@ sub nikto_tests {
                      $TESTS{$checkid}{'method'},
                      $data,
                      \%headrs,
-                     \%flags, 
+                     \%flags,
                      $checkid);
 
             # NOTE: auth is now done in nfetch
@@ -96,7 +97,7 @@ sub nikto_tests {
             # If user puts a @CODE= string in db_404_strings, let it take precedence
             foreach my $code (keys %{ $VARIABLES->{'ERRCODES'} }) {
                 if ($res =~ /$code/) {
-                    return;
+                    next URI;
                 }
             }
 
@@ -290,7 +291,7 @@ sub passchecks {
     my ($mark) = @_;
     my @DIRS   = (split(/ /, $VARIABLES{"\@PASSWORDDIRS"}));
     my @PFILES = (split(/ /, $VARIABLES{"\@PASSWORDFILES"}));
-    my @EXTS = qw(asp bak dat data dbc dbf exe htm html htx ini lst txt xml php php3 phtml);
+    my @EXTS = qw(asp bak dat data dbc dbf exe htm html htx ini lst txt xml php php3);
 
     nprint("- Performing passfiles mutation", "v");
 

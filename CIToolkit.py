@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 import os
+import subprocess
 if __name__ == "__main__":
     with open("scripts/PANEL/logos/mainlogo.txt", "r") as f:
         hacker_art = f.read()
 
     print("\033[32m" + hacker_art + "\033[0m")
+#Start Of Authentication
+import warnings
+import getpass
+import sys
+from getpass import GetPassWarning
+warnings.filterwarnings("ignore", category=GetPassWarning)
+VALID_KEY = "FREECUBA"
 #Start Of Authentication
 import warnings
 import getpass
@@ -30,7 +38,7 @@ def authenticate():
         sys.exit(0)
 if __name__ == "__main__":
     authenticate()
-#End Of Authentication      
+#End Of Authentication
 def loopfunc():    
 #START of options    
     choice = input("C.I Tool-Kit Command :")
@@ -98,7 +106,7 @@ def loopfunc():
         print("Please follow the on screen install.")
         cmd1 = os.system ("sudo apt-get install tor")
         cmd1 = os.system ("sudo service tor start")
-        cmd1 = os.system ("python3 scripts/sqli.py")
+        cmd1 = os.system ("python3 scripts/SQLI_M/sqli.py")
 #----------------------End of SQL injection module call----------------------------------
 
     if choice == "vulscan":
@@ -111,7 +119,7 @@ def loopfunc():
         print("The Toolkit Script requires Python2.")
         print("Please follow the on screen install.")
         cmd1 = os.system ("sudo apt-get install python2")
-        cmd1 = os.system ("sudo python2 scripts/vulscan.py")
+        cmd1 = os.system ("python3 scripts/NVulScan/vulscan.py")
 
     #Start of Misc Options
     if choice == "itor":
@@ -387,10 +395,12 @@ def loopfunc():
         print ("-----------------------------")
         email_db = input("Podesta or DNC?:")
         cmd1 = os.system("python scripts/WikileaksEmailDownloader.py --start 1 --end  -1 --retries 5 "+email_db)
+
     if choice == "vpn":
         print("Starting VPN (BITMASK)")
-        cmd1 = os.system ("sh tools/vpn/./bitmask")
-        cmd1 = os.system ("bitmask")
+        cmd = ["./tools/vpn/BITM@ASK_KIT_3D1T0N/bitmask"]
+        subprocess.run(cmd, shell=True)
+
     #Testing Toxic Crawler
     if choice == "toxicdork":
         cmd1 = os.system ("python3 scripts/Tox1cDorkeR.py")
@@ -402,6 +412,10 @@ def loopfunc():
         cmd1 = os.system("python3 scripts/FIREWALL/install_requirements.py")
         cmd1 = os.system("sudo python3 scripts/FIREWALL/Firewall.py linux")
 
+    if choice == "anavi":
+        print("ATT&CK Navigator")
+        cmd1 = os.system("python3 scripts/SENTINEL2ATT/install_requirements.py")
+        cmd1 = os.system("python3 scripts/SENTINEL2ATT/Sentinel2Attack.py")
 
 	#if choice == "tcrawl":
 	#	print("Starting Toxic Crawler")
