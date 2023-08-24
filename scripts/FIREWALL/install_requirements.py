@@ -5,7 +5,7 @@ import sys
 
 
 def install_requirements():
-    requirements = ["scapy", "psutil","netifaces","colorama"]
+    requirements = ["scapy", "psutil","netifaces","colorama","tabulate"]
 
     try:
         for requirement in requirements:

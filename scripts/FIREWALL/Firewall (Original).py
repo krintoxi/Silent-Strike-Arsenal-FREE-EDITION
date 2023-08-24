@@ -2,15 +2,15 @@ import os
 import platform
 import datetime
 import socket
-from threading import Thread
-import time
+import struct
+import fcntl
 import argparse
+from threading import Thread
 from scapy.all import sniff, IP, TCP, Raw
 from tabulate import tabulate
+import time
 import netifaces as ni
 from colorama import Fore, Style
-global blocked_connections
-global network_log
 
 BLOCKLIST = ["example.com", "maliciousdomain.org","93.184.216.34"]  # Add blocklisted domains here
 KEYWORDS = ["porn", "hacker", "virus", ".exe"]  # Add keywords to check in domain names
