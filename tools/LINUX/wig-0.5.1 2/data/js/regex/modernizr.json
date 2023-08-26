@@ -1,9 +1,0 @@
-[
-	{
-        "url": "",
-		"type": "regex",
-		"match": "modernizr-([\\d\\.?]+)\\.[min\\.]*js",
-		"output": "%s",
-		"code": "any"
-	}
-]
