@@ -1,6 +1,6 @@
 ## Description
 
-**Counter Intelligence Toolkit (CIToolkit.py)** is a powerful Python script developed by **Intercuba.Net**, with **Krintoxi** as the chief developer. This toolkit is designed to provide cybersecurity professionals, data analysts, and project managers with a comprehensive suite of tools. It offers a versatile and modular solution that empowers users to effectively tackle various tasks related to cybersecurity, data analysis, and project management.
+A powerful Python script developed by **Intercuba.Net**, with **Krintoxi** as the chief developer. This toolkit is designed to provide cybersecurity professionals, data analysts, and project managers with a comprehensive suite of tools. It offers a versatile and modular solution that empowers users to effectively tackle various tasks related to cybersecurity, data analysis, and project management.
 
 ### Authentication
 
