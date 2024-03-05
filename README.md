@@ -54,19 +54,11 @@ Enhance anonymity by utilizing the `macspoof.py` script to change your device's 
 
 Discover hidden features within the toolkit for delightful surprises and experiences.
 
-## Installation and Usage
-
-To start using CIToolkit.py, simply run the following command:
-
-```bash
-python3 CIToolkit.py
-```
-
 Upon launching the script, users will be prompted for an access key. Once authenticated, users gain access to the main menu with a variety of options tailored to their objectives.
 
 ## Available Commands
 
-CIToolkit.py offers a plethora of commands and modules, including but not limited to:
+offers a plethora of commands and modules, including but not limited to:
 
 `apf`, `terminal`, `panel`, `sys`, `sqli`, `vulscan`, `itor`, `stor`, `dvpn`, `shells`, `phptools`, `backdoorssh`, `discover`, `dinfo`, `hash type`, `numconverter`, `hexconv`, `update`, `converters`, `aconv`, `osint`, `steghide`, `ddos`, `tsqli`, `encdns`, `stegattack`, `clear`, `home`, `uihanalysis`, `exit`, `toolbox`, `spoof my mac`, `exif`, `localports`, `portscan`, `sqlscan`, `noobpasswd`, `wle`, `vpn`, `toxicdork`, `t-cipher`, `firewall`.
 
@@ -74,5 +66,5 @@ For detailed descriptions of each command, refer to the script itself.
 
 ## Embrace the Power
 
-**Counter Intelligence Toolkit (CIToolkit.py)**, developed by **Intercuba.Net** empowers users to push their boundaries and excel in their tasks. Unleash your potential and conquer new frontiers with unparalleled finesse! 🚀
+**Silent Strike Arsenal**, developed by **Intercuba.Net** empowers users to push their boundaries and excel in their tasks. Unleash your potential and conquer new frontiers with unparalleled finesse! 🚀
 
