@@ -1,0 +1,8 @@
+#!/bin/bash
+# Run Toolkit InterCuba.Net
+echo "---------------------------"
+echo "Updating package lists..."
+echo "---------------------------"
+cd
+cd InterCubaNet/Silent_Strike_Arsenal_RELEASE
+python3 SSA_GUI.pyc
