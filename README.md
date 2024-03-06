@@ -16,7 +16,7 @@ Gain access to a secure terminal environment. If the required terminal emulator 
 
 ### Cybersecurity Utilities
 
-Utilize a range of cybersecurity tools, including SQL injection detection (`sqli`), vulnerability scanning (`vulscan`), analysis of different hash types, and more.
+Utilize a range of cybersecurity tools, including SQL injection detection (`sqli`), vulnerability scanning (`vulscan`) (Latest Version Of Nikto Scanner Preconfigured and Upgraded with additional plugins.), analysis of different hash types, and more.
 
 ### Data Analysis Tools
 
