@@ -153,12 +153,12 @@ def validate_password():
         auth_message_label.grid(row=0, column=0, columnspan=4, padx=10, pady=10, sticky='nsew')
 
         # Enable the first four script buttons
-        for widget in script_buttons[:4]:  # Only the first four script buttons should be enabled
+        for widget in script_buttons[:9]:  # Only the first four script buttons should be enabled
             widget['state'] = 'normal'
 
         # Keep the rest disabled and show tooltip prompting upgrade
         upgrade_message = "Upgrade to the full edition to unlock this feature."
-        for button in script_buttons[4:]:  # Apply this to buttons from the fifth onwards
+        for button in script_buttons[9:]:  # Apply this to buttons from the fifth onwards
             button['state'] = 'disabled'
             CreateToolTip(button, upgrade_message)
             CreateToolTip(command_entry1, upgrade_message)
