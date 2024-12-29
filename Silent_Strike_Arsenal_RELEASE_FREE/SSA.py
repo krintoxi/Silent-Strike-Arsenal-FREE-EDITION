@@ -11,7 +11,20 @@ import uuid
 import socket
 import platform
 import random
+import sys
+
+def resource_path(relative_path):
+    """Returns the absolute path to the resource."""
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        # For normal use (when not packaged)
+        base_path = os.path.abspath(".")
+    
+    return os.path.join(base_path, relative_path)
 # Function to get the public IP address
+
 def get_public_ip():
     try:
         return requests.get('https://api.ipify.org').text
@@ -52,21 +65,30 @@ class CreateToolTip(object):
         if self.tw:
             self.tw.destroy()
 
-
-# Placeholder functions for each script
 # Placeholder functions for each script
 def script_panel():
     print("Running PANEL")
-    os.system("python3 scripts/SSA_PANEL/setup.py")
-    os.system("gnome-terminal -- python3 scripts/SSA_PANEL/Panel.py")
+    panel_script_path = resource_path("Tools/SSA_PANEL")  # Get the absolute path
+    if os.path.exists(panel_script_path):
+        os.system(panel_script_path)  # Run the script with absolute path
+    else:
+        print(f"Error: {panel_script_path} not found.")
 
 def script_vulnerability_scan():
     print("Running Vulnerability Scan")
-    os.system("gnome-terminal -- python3 scripts/SSA_NVulScan/vulscan.py")
+    vuln_scan_script_path = resource_path("Tools/SSA_V_SCAN_UI")  # Get the absolute path
+    if os.path.exists(vuln_scan_script_path):
+        os.system(vuln_scan_script_path)  # Run the script with absolute path
+    else:
+        print(f"Error: {vuln_scan_script_path} not found.")
 
 def script_admin_page_finder():
     print("Running Admin Page Finder")
-    os.system("gnome-terminal -- python3 scripts/SSA_APF/APF.py")
+    admin_finder_script_path = resource_path("Tools/SSA_Admin_Find")  # Get the absolute path
+    if os.path.exists(admin_finder_script_path):
+        os.system(admin_finder_script_path)  # Run the script with absolute path
+    else:
+        print(f"Error: {admin_finder_script_path} not found.")
 
 def script_ddos():
     print("Running DDOS")
@@ -131,7 +153,7 @@ def script_open_shells():
 def script_tele_grab():
     print("| S.S.A_Telegram Grabber |")
     os.system("gnome-terminal -- python3 scripts/SSA_TELEGRAM/SSA_T.py")
-
+###
 # Function to open a hyperlink
 def open_link(url):
     try:
@@ -217,28 +239,30 @@ for i in range(8):  # Assuming 8 is the maximum grid row number used
     root.grid_rowconfigure(i, weight=1)
 for i in range(4):  # Assuming 4 is the maximum grid column number used
     root.grid_columnconfigure(i, weight=1)
+
 # Set the window icon
 try:
-    icon_image = PhotoImage(file="scripts/SSA_PANEL/logos/Logo.png")
-    root.iconphoto(True, icon_image)
+    icon_path = resource_path("Tools/Logo.png")  # Use the resource_path to get the correct path
+    logo_image = PhotoImage(file=icon_path)  # Load the logo image for the icon
+    root.iconphoto(True, logo_image)  # Set the icon for the root window
 except Exception as e:
     print(f"Error setting icon: {e}")
 
 # Load and display the logo
-# List of logo file names
-logos = ["Logo.png", "Logo2.png", "Logo3.png","Logo4.png","Logo5.png","Logo6.png","Logo7.png"]
+# List of logo file names (can be extended with other logos if needed)
+logos = ["Logo.png"]
 
 # Pick a random logo
 selected_logo = random.choice(logos)
 
-# Load and display the logo
+# Load and display the logo using the resource_path function
 try:
-    logo_path = f"scripts/SSA_PANEL/logos/{selected_logo}"
-    logo_image = ImageTk.PhotoImage(Image.open(logo_path))
-    logo_label = tk.Label(root, image=logo_image, bg='#000')
-    logo_label.grid(row=0, column=0, columnspan=4)
+    logo_path = resource_path(f"Tools/{selected_logo}")
+    display_logo_image = ImageTk.PhotoImage(Image.open(logo_path))  # Use a different variable for display
+    logo_label = tk.Label(root, image=display_logo_image, bg='#000')
+    logo_label.grid(row=0, column=0, columnspan=4)  # Adjust the position as needed
 except FileNotFoundError:
-    print("Logo file not found. Please check the path.")
+    print(f"Logo file {selected_logo} not found. Please check the path.")
 except Exception as e:
     print(f"Error loading logo image: {e}")
 
@@ -377,8 +401,12 @@ text_paragraph.grid(row=7, column=0, columnspan=4, pady=(10, 0))
 def open_intercuba():
     webbrowser.open("https://intercuba.net")
 
-# Load the flag image
-flag_image = PhotoImage(file="scripts/SSA_PANEL/logos/flag.png")  # Replace with the path to your flag image
+# Load the flag image using resource_path
+try:
+    flag_image_path = resource_path("Tools/flag.png")
+    flag_image = PhotoImage(file=flag_image_path)
+except Exception as e:
+    print(f"Error loading flag image: {e}")
 
 # Create the flag label
 flag_label = tk.Label(footer_frame, image=flag_image, bg='#000')

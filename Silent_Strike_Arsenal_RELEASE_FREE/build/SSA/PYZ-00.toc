@@ -1,4 +1,4 @@
-('/home/krintoxi/Documents/GitHub/Silent-Strike-Arsenal-FREE-EDITION/Silent_Strike_Arsenal_RELEASE_FREE/build/SSA/PYZ-00.pyz',
+('/home/krintoxi/Desktop/SSA_FREE/build/SSA/PYZ-00.pyz',
  [('OpenSSL', '/usr/lib/python3/dist-packages/OpenSSL/__init__.py', 'PYMODULE'),
   ('OpenSSL.SSL', '/usr/lib/python3/dist-packages/OpenSSL/SSL.py', 'PYMODULE'),
   ('OpenSSL._util',
